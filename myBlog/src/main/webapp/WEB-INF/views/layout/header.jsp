@@ -32,7 +32,8 @@
 						<div class="popup--item">
 							<h3>블로그명</h3>
 							<div>
-								<input class="input--text" type="text">
+								<input class="input--text" type="text"  
+								onkeyup="characterCheck(this);" onkeydown="characterCheck(this);">
 								<div class="input--plus">한글, 영문, 숫자, 혼용가능 (4-25자 이내)</div>
 							</div>
 						</div>
@@ -53,7 +54,8 @@
 							<h3>YouTube URL</h3>
 							<div>
 							<div style="position: absolute;" class="social--text" type="text" >http://www.youtube.com/@</div>
-							<input class="input--text" id="social--input" type="text">
+							<input class="input--text" id="social--input" type="text" 
+							onkeyup="socialCheck(this);">
 							<div class="input--plus">User ID 입력</div>
 							</div>
 						</div>
@@ -61,7 +63,8 @@
 							<h3>Instagram URL</h3>
 							<div>
 							<div style="position: absolute;" class="social--text" type="text" >http://www.instagram.com/</div>
-							<input class="input--text"  id="social--input" type="text">
+							<input class="input--text"  id="social--input" type="text"
+							onkeyup="socialCheck(this);">
 							<div class="input--plus">User ID 입력</div>
 							</div>
 						</div>
