@@ -7,13 +7,22 @@
 	box-sizing: border-box;
 }
 
-header {
+#header--no--image{
 	display: flex;
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 30px;
 	border-bottom: 2px solid rgb(0, 0, 0, 0.2);
+	justify-content: space-between;
+}
+
+#header--image{
+	display: flex;
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
 	justify-content: space-between;
 }
 

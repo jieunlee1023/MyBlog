@@ -1,14 +1,13 @@
 package com.example.myBlog.service;
 
-import java.awt.Image;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.myBlog.dto.request.RequestBlogHeadlineDto;
@@ -17,6 +16,7 @@ import com.example.myBlog.repository.BlogHeadLineRepository;
 
 @Service
 public class MainService {
+	
 
 	@Autowired
 	private BlogHeadLineRepository blogHeadLineRepository;
@@ -27,7 +27,7 @@ public class MainService {
 
 		String imageFileName = uuid + "_" + blogHeadlineDto.getFile().getOriginalFilename();
 
-		Path imageFilePath = Paths.get("C:\\MyBlog\\images\\blog-headLine\\" + imageFileName);
+		Path imageFilePath = Paths.get("C:\\MyBlog\\image\\blog-headLine\\" + imageFileName);
 
 		// 파일 만들기 하는 방법
 		try {
@@ -42,8 +42,11 @@ public class MainService {
 
 	}
 
-	public void findByDto() {
-		List<BlogHeadLine> headlineEntity = blogHeadLineRepository.findAll();
+	public BlogHeadLine findByLastDto() {
+		BlogHeadLine headlineEntity = blogHeadLineRepository.findById(1).orElseThrow(()->{
+			return new IllegalArgumentException("찾을 수가 없습니다.");
+		});
+		return headlineEntity;
 	}
 
 }

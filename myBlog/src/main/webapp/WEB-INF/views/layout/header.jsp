@@ -17,10 +17,18 @@
 </head>
 <body>
 
-	<header>
-		<div id="header--left">
-			<div id="header--title">${blogHeadlineDto.blogName}</div>
-
+			<c:choose>
+				<c:when test="${empty blogHeadlineDto.image}">
+					<header id="header--no--image">
+						<div id="header--left">
+						<div id="header--title">${blogHeadlineDto.blogName}</div>
+				</c:when>
+				<c:otherwise>
+					<header id="header--image" style="background-image: url('http://localhost:9999/image/${blogHeadlineDto.image}');">
+						<div id="header--left">
+						<div id="header--title">${blogHeadlineDto.blogName}</div>
+				</c:otherwise>
+			</c:choose>
 
 			<div class="wrap">
 				<a class="popup--open" id="header--setting" href="#pop--up"> <img
@@ -81,11 +89,24 @@
 
 		</div>
 		<div id="header--right">
-			<a id="header--img"> <img id="header--insta--img"
-				src="/images/instagram.png" alt="인스타그램">
-			</a> <a id="header--img"> <img id="header--youtube--img"
+		<c:choose>
+			<c:when test="${empty blogHeadlineDto.instagramURL }"></c:when>
+			<c:otherwise>
+				<a id="header--img" href="http://www.instagram.com/${instagramURL }" target="_blank"> <img id="header--insta--img"
+				src="/images/instagram.png" alt="인스타그램" ></a>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test="${empty blogHeadlineDto.youtubeURL }"></c:when>
+			<c:otherwise>
+			 <a id="header--img" href="http://www.youtube.com/${youtubeURL }" target="_blank"> <img id="header--youtube--img"
 				src="/images/youtube.png" alt="유튜브">
 			</a>
+			</c:otherwise>
+		</c:choose>
+
+
 		</div>
 	</header>
 
