@@ -1,21 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/css/main.css">
-</head>
-<body>
-
-<header>
-	<div id="header--title">My Blog</div>
-	<a id="header--setting">
-		<img  id="header--setting--img" src="/images/setting.png" alt="설정">
-	</a>
-</header>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="layout/header.jsp" %>
 
 <div id="main--body">
 

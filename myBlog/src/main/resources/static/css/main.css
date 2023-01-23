@@ -1,34 +1,3 @@
-@charset "UTF-8";
-
-* {
-	margin: 0;
-	box-sizing: border-box;
-}
-
-header {
-	display: flex;
-	width: 1000px;
-	margin: 0 auto;
-	margin-top: 20px;
-	margin-bottom: 30px;
-	border-bottom: 2px solid rgb(0,0,0,0.2);
-}
-
-#header--title {
-	margin: 10px;
-	font-size: 50px;
-	font-weight: bold;
-}
-
-#header--setting {
-	
-}
-
-#header--setting--img {
-	width: 25px;
-	height: 25px;
-	margin-top: 20px;
-}
 
 
 #main--body {
@@ -40,7 +9,8 @@ header {
 
 #main--body--left {
 	width: 220px;
-	height: 30%; border : 1px solid black;
+	height: 30%;
+	border: 1px solid black;
 	border-radius: 20px;
 	padding: 15px;
 	border: 1px solid black;
@@ -76,7 +46,7 @@ header {
 	display: flex;
 }
 
-#body--right--title h3{
+#body--right--title h3 {
 	margin-right: 5px;
 }
 
@@ -102,11 +72,11 @@ header {
 
 .main--board--items div {
 	margin: 10px;
-	margin-bottom:35px;
+	margin-bottom: 35px;
 }
 
 .main--board--items span {
 	margin: 10px;
-	font-size: 15px;	
-	color: rgb(0,0,0,0.5);
+	font-size: 15px;
+	color: rgb(0, 0, 0, 0.5);
 }
