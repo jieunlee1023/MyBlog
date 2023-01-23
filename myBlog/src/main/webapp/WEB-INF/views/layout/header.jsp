@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%> --%>
 <!DOCTYPE html>
@@ -18,7 +19,7 @@
 
 	<header>
 		<div id="header--left">
-			<div id="header--title">My Blog</div>
+			<div id="header--title">${blogHeadlineDto.blogName}</div>
 
 
 			<div class="wrap">
@@ -26,54 +27,55 @@
 					id="header--setting--img" src="/images/setting.png" alt="설정">
 				</a>
 
-
-				<div id="pop--up" class="popup--wrap" style="display: none;">
-					<div class="popup--inner" >
-						<div class="popup--item">
-							<h3>블로그명</h3>
-							<div>
-								<input class="input--text" type="text"  
-								onkeyup="characterCheck(this);" onkeydown="characterCheck(this);">
-								<div class="input--plus">한글, 영문, 숫자, 혼용가능 (4-25자 이내)</div>
-							</div>
-						</div>
-						<div class="popup--item">
-							<h3>블로그 상단 배경</h3>	
-							<div>
-							<div style="display: flex;">
-								<label for="img--save" id="img--save--label">이미지 등록</label> 
-								<input type="file" id="img--save"> 
-								<input class="upload-name" readonly>
+				<form action="/blog-headline" method="post" enctype="multipart/form-data">
+					<div id="pop--up" class="popup--wrap" style="display: none;">
+						<div class="popup--inner" >
+							<div class="popup--item">
+								<h3>블로그명</h3>
+								<div>
+									<input class="input--text" type="text" name="blogName" 
+									onkeyup="characterCheck(this);" onkeydown="characterCheck(this);">
+									<div class="input--plus">한글, 영문, 숫자, 혼용가능 (4-25자 이내)</div>
 								</div>
-								<div class="input--plus">가로 1000px, 세로 80~300px</div>
 							</div>
-						</div>
-									
-					
-						<div class="popup--item">
-							<h3>YouTube URL</h3>
-							<div>
-							<div style="position: absolute;" class="social--text" type="text" >http://www.youtube.com/@</div>
-							<input class="input--text" id="social--input" type="text" 
-							onkeyup="socialCheck(this);">
-							<div class="input--plus">User ID 입력</div>
+							<div class="popup--item">
+								<h3>블로그 상단 배경</h3>	
+								<div>
+								<div style="display: flex;">
+									<label for="img--save" id="img--save--label">이미지 등록</label> 
+									<input type="file" id="img--save"  name="file"> 
+									<input class="upload-name" readonly >
+									</div>
+									<div class="input--plus">가로 1000px, 세로 80~300px</div>
+								</div>
 							</div>
-						</div>
-						<div class="popup--item">
-							<h3>Instagram URL</h3>
-							<div>
-							<div style="position: absolute;" class="social--text" type="text" >http://www.instagram.com/</div>
-							<input class="input--text"  id="social--input" type="text"
-							onkeyup="socialCheck(this);">
-							<div class="input--plus">User ID 입력</div>
-							</div>
-						</div>
+										
 						
-							<button class="popup-cancel" id="popup-cancel" type="button">취소</button>
-							<button class="popup--btn" type="button">확인</button>
-						
+							<div class="popup--item">
+								<h3>YouTube URL</h3>
+								<div>
+								<div style="position: absolute;" class="social--text" type="text" >http://www.youtube.com/@</div>
+								<input class="input--text" id="social--input" type="text" name="youtubeURL"
+								onkeyup="socialCheck(this);">
+								<div class="input--plus">User ID 입력</div>
+								</div>
+							</div>
+							<div class="popup--item">
+								<h3>Instagram URL</h3>
+								<div>
+								<div style="position: absolute;" class="social--text" type="text" >http://www.instagram.com/</div>
+								<input class="input--text"  id="social--input" type="text" name="instagramURL"
+								onkeyup="socialCheck(this);">
+								<div class="input--plus">User ID 입력</div>
+								</div>
+							</div>
+							
+								<button class="popup-cancel" id="popup-cancel" type="button">취소</button>
+								<button class="popup--btn" id="popup--save" type="submit">확인</button>
+							
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 
 

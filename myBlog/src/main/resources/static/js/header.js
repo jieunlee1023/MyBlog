@@ -10,7 +10,7 @@ for (var i = 0; i < target.length; i++) {
 		document.querySelector(targetID).style.display = 'block';
 
 		$("#img--save").bind('change', function() {
-			var fileName = $("#img--save").val();
+			var fileName = $("#img--save").val().split("\\").pop();;
 			var idxDot = fileName.lastIndexOf(".") + 1;
 			var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
 			if (extFile != "jpg" && extFile != "jpeg" && extFile != "png") {
@@ -19,6 +19,7 @@ for (var i = 0; i < target.length; i++) {
 				$(".upload-name").val(fileName);
 			}
 		});
+		
 
 	});
 }
