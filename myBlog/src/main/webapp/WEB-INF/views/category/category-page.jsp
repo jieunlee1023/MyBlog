@@ -2,30 +2,43 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../index.jsp"%>
 
-	
 
-		<div id="main--body--right">
-			<div id="body--right--top">
 
-				<div id="body--right--title">
-					<h3>${categoryEntity.categoryName }</h3>
-					<h3 style="color: #5cbeb6">20</h3>
-				</div>
-				<a href="/board/save"><img id="main--right--img" src="/images/write.png" alt="글쓰기"></a>
+<div id="main--body--right">
+	<div id="body--right--top">
 
-			</div>
+		<div id="body--right--title">
+			<h3>${categoryEntity.categoryName }</h3>
+			<h3 style="color: #5cbeb6">${boardListSize } </h3>
+		</div>
+		<a href="/board/save"><img id="main--right--img"
+			src="/images/write.png" alt="글쓰기"></a>
 
-			<div id="main--board">
+	</div>
+<br>
+	<div id="main--board--item">
+	<input type="hidden" value="${boardListSize }" id="board--size">
+	<c:forEach var="board" items="${boardList }">
 				<div class="main--board--items">
-					<img class="board--img" src="">
-					<div>팬덤확보에 성공한 4세대 걸구룹의 차별화 전략</div>
-					<span>2022.12.30</span>
+					<img id="new--bedge" src="/images/new.png">
+					<c:choose>
+						<c:when test="${empty board.boardImg }">
+							<div id="board--title--img"><span>${board.title }</span></div>
+						</c:when>
+						<c:otherwise>
+							<img class="board--img" src="http://localhost:9999/image/${board.boardImg}">
+						</c:otherwise>
+					</c:choose>
+					<div id="board--title">${board.title }</div>
+					<div id="board--createDate">${board.createDate }</div>
 				</div>
-
-			</div>
+	</c:forEach>
 		</div>
 
-
 </div>
+</div>
+<br><br><br>
+<script type="text/javascript" src="/js/category-list.js"></script>
 </body>
 </html>
+

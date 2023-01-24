@@ -40,6 +40,9 @@ public class Board {
 	@Lob
 	private String content;
 	
+	@Column(nullable = true)
+	private String boardImg;
+	
 	@CreationTimestamp 
 	private Timestamp createDate;
 	

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
+	@Transactional
 	public void save(Category category) {
 
 		String categoryAllName = category.getCategoryName();
@@ -31,8 +34,6 @@ public class CategoryService {
 			category.setId(i);
 			categoryRepository.save(category);
 		}
-
-
 
 	}
 

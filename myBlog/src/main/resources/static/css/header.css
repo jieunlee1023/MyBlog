@@ -66,6 +66,7 @@
 	background: rgba(0, 0, 0, .5);
 	font-size: 0;
 	text-align: center;
+	z-index: 999;
 }
 
 .popup--wrap:after {

@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +17,11 @@ import com.example.myBlog.repository.BlogHeadLineRepository;
 
 @Service
 public class MainService {
-	
 
 	@Autowired
 	private BlogHeadLineRepository blogHeadLineRepository;
 
+	@Transactional
 	public void blogHeadLineSave(RequestBlogHeadlineDto blogHeadlineDto) {
 		// UUID 사용법
 		UUID uuid = UUID.randomUUID();
@@ -41,6 +43,7 @@ public class MainService {
 
 	}
 
+	@Transactional
 	public BlogHeadLine findByLastDto() {
 		BlogHeadLine headlineEntity = blogHeadLineRepository.findByLastId();
 		return headlineEntity;

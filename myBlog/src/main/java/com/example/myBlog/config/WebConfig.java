@@ -15,9 +15,11 @@ public class WebConfig implements WebMvcConfigurer {
 
 		registry.addResourceHandler("/image/**")
 		.addResourceLocations("file:///" + "C:\\MyBlog\\image\\blog-headLine\\")
+		.addResourceLocations("file:///" + "C:\\MyBlog\\image\\board\\")
 		.setCachePeriod(60 * 10 * 6) 
 		.resourceChain(true) 
 		.addResolver(new PathResourceResolver());
+
 		
 	}
 	

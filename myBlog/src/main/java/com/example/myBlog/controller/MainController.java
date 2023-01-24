@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.myBlog.dto.request.RequestBlogHeadlineDto;
 import com.example.myBlog.entity.BlogHeadLine;
+import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
+import com.example.myBlog.repository.BoardRepository;
 import com.example.myBlog.repository.CategoryRepository;
 import com.example.myBlog.service.MainService;
 
@@ -19,6 +21,9 @@ public class MainController {
 
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+	private BoardRepository boardRepository;
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -32,6 +37,9 @@ public class MainController {
 		BlogHeadLine headlineEntity  = mainService.findByLastDto();
 		model.addAttribute("blogHeadlineDto", headlineEntity);
 		
+		List<Board> boardList = boardRepository.findAll();
+		model.addAttribute("boardList", boardList);
+		
 		return "index";
 	}
 
@@ -42,7 +50,6 @@ public class MainController {
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 		
-		model.addAttribute("blogHeadlineDto", blogHeadlineDto);
 		return "redirect:/";
 	}
 }

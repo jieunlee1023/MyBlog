@@ -50,7 +50,6 @@
 		</c:forEach>
 
 	</div>
-	
 
 
 <script type="text/javascript" src="/js/category.js"></script>

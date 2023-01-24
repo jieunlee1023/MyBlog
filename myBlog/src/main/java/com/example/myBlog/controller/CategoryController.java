@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.myBlog.entity.BlogHeadLine;
+import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
+import com.example.myBlog.repository.BoardRepository;
 import com.example.myBlog.repository.CategoryRepository;
 import com.example.myBlog.service.CategoryService;
 import com.example.myBlog.service.MainService;
@@ -19,7 +21,7 @@ import com.example.myBlog.service.MainService;
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
-	
+
 	@Autowired
 	private MainService mainService;
 
@@ -28,6 +30,9 @@ public class CategoryController {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+
+	@Autowired
+	private BoardRepository boardRepository;
 
 	@PostMapping("/save")
 	public String categorySave(Category category, Model model) {
@@ -41,17 +46,20 @@ public class CategoryController {
 	public String categorySave(@PathVariable int categoryId, Model model) {
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
-		
-		BlogHeadLine headlineEntity  = mainService.findByLastDto();
+
+		BlogHeadLine headlineEntity = mainService.findByLastDto();
 		model.addAttribute("blogHeadlineDto", headlineEntity);
-		
-		Category categoryEntity =  categoryRepository.findById(categoryId).orElseThrow(()->{
+
+		Category categoryEntity = categoryRepository.findById(categoryId).orElseThrow(() -> {
 			return new IllegalArgumentException("찾으시는 카테고리가 없습니다.");
 		});
 		model.addAttribute("categoryEntity", categoryEntity);
+
+		List<Board> boardList = boardRepository.findbyCategoryId(categoryId);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardListSize", boardList.size());
+
 		return "category/category-page";
 	}
-
-	
 
 }
