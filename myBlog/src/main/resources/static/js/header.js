@@ -17,9 +17,17 @@ for (var i = 0; i < target.length; i++) {
 				alert("이미지 확장자는 png / jpg / jpeg 만 등록 가능합니다!");
 			} else {
 				$(".upload-name").val(fileName);
+				$("#trashcan--img")[0].style.display = 'block';
+
+				$("#trashcan--img").bind("click", function() {
+					$("#img--save").val(null);
+					$(".upload-name").val("");
+					$("#trashcan--img")[0].style.display = 'none';
+				});
+
 			}
 		});
-		
+
 
 	});
 }

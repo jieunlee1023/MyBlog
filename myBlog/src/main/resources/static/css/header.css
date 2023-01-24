@@ -7,7 +7,7 @@
 	box-sizing: border-box;
 }
 
-#header--no--image{
+#header--no--image {
 	display: flex;
 	width: 1000px;
 	margin: 0 auto;
@@ -17,7 +17,7 @@
 	justify-content: space-between;
 }
 
-#header--image{
+#header--image {
 	display: flex;
 	width: 1000px;
 	margin: 0 auto;
@@ -149,7 +149,7 @@
 	border: 0;
 }
 
-.popup--btn , .popup-cancel {
+.popup--btn, .popup-cancel {
 	width: 210px;
 	height: 50px;
 	margin: 10px;
@@ -168,14 +168,22 @@
 	font-weight: bold;
 }
 
-.social--text{
+.social--text {
 	font-size: 23px;
 	margin-top: 17px;
 	margin-left: 10px;
-	color: rgb(0,0,0,0.3);
+	color: rgb(0, 0, 0, 0.3);
 	padding-left: 10px;
 }
 
-#social--input{
+#social--input {
 	padding-left: 305px;
+}
+
+#trashcan--img {
+	position: absolute; 
+	width : 20px;
+	height: 20px;
+	margin-left: 515px;
+	margin-top: 25px;
 }
