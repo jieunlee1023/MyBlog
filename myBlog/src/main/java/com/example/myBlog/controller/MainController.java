@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.myBlog.dto.request.RequestBlogHeadlineDto;
 import com.example.myBlog.entity.BlogHeadLine;
+import com.example.myBlog.entity.Category;
+import com.example.myBlog.repository.CategoryRepository;
 import com.example.myBlog.service.MainService;
 
 @Controller
@@ -17,17 +19,29 @@ public class MainController {
 
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@GetMapping({ "", "/" })
 	public String main(Model model) {
+		
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+		
 		BlogHeadLine headlineEntity  = mainService.findByLastDto();
 		model.addAttribute("blogHeadlineDto", headlineEntity);
+		
 		return "index";
 	}
 
 	@PostMapping("/blog-headline")
 	public String blogHeadLineSave(RequestBlogHeadlineDto blogHeadlineDto, Model model) {
 		mainService.blogHeadLineSave(blogHeadlineDto);
+		
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+		
 		model.addAttribute("blogHeadlineDto", blogHeadlineDto);
 		return "redirect:/";
 	}

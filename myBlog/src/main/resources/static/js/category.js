@@ -2,7 +2,8 @@
 var target = document.querySelectorAll('.popup--cateogry--open');
 var btnPopClose = document.querySelectorAll('.popup--category--wrap .popup-category-cancel');
 var targetID;
-var count = 1;
+var count = $('#category--size').val();
+
 
 
 // 팝업 열기
@@ -49,7 +50,6 @@ function characterCheck(obj) {
 for (var j = 0; j < target.length; j++) {
 	btnPopClose[j].addEventListener('click', function() {
 		this.parentNode.parentNode.style.display = 'none';
-		location.href = "/";
 	});
 }
 
