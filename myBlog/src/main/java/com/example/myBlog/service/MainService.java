@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.myBlog.dto.request.RequestBlogHeadlineDto;
@@ -43,9 +42,7 @@ public class MainService {
 	}
 
 	public BlogHeadLine findByLastDto() {
-		BlogHeadLine headlineEntity = blogHeadLineRepository.findById(1).orElseThrow(()->{
-			return new IllegalArgumentException("찾을 수가 없습니다.");
-		});
+		BlogHeadLine headlineEntity = blogHeadLineRepository.findByLastId();
 		return headlineEntity;
 	}
 

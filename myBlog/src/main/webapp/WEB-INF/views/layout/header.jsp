@@ -18,10 +18,15 @@
 <body>
 
 			<c:choose>
+				<c:when test="${empty blogHeadlineDto.image && empty blogHeadlineDto.blogName}">
+					<header id="header--no--image">
+						<div id="header--left">
+						<div id="header--title">My Blog</div>
+				</c:when>
 				<c:when test="${empty blogHeadlineDto.image}">
 					<header id="header--no--image">
 						<div id="header--left">
-						<div id="header--title">${blogHeadlineDto.blogName}</div>
+						<div id="header--title">${blogHeadlineDto.blogName }</div>
 				</c:when>
 				<c:otherwise>
 					<header id="header--image" style="background-image: url('http://localhost:9999/image/${blogHeadlineDto.image}');">
@@ -41,7 +46,8 @@
 							<div class="popup--item">
 								<h3>블로그명</h3>
 								<div>
-									<input class="input--text" type="text" name="blogName" 
+									<input class="input--text" type="text" name="blogName"  
+									value="${blogHeadlineDto.blogName }" autofocus="autofocus"
 									onkeyup="characterCheck(this);" onkeydown="characterCheck(this);">
 									<div class="input--plus">한글, 영문, 숫자, 혼용가능 (4-25자 이내)</div>
 								</div>
@@ -66,7 +72,7 @@
 								<div>
 								<div style="position: absolute;" class="social--text" type="text" >http://www.youtube.com/@</div>
 								<input class="input--text" id="social--input" type="text" name="youtubeURL"
-								onkeyup="socialCheck(this);">
+								onkeyup="socialCheck(this);" value="${blogHeadlineDto.youtubeURL }">
 								<div class="input--plus">User ID 입력</div>
 								</div>
 							</div>
@@ -75,7 +81,7 @@
 								<div>
 								<div style="position: absolute;" class="social--text" type="text" >http://www.instagram.com/</div>
 								<input class="input--text"  id="social--input" type="text" name="instagramURL"
-								onkeyup="socialCheck(this);">
+								onkeyup="socialCheck(this);" value="${blogHeadlineDto.instagramURL }">
 								<div class="input--plus">User ID 입력</div>
 								</div>
 							</div>

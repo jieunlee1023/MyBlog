@@ -1,12 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="layout/header.jsp" %>
 
+<br>
 <div id="main--body">
 
 	<div id="main--body--left">
 		<div id="main--left--title">
 			<h3>전체보기</h3>
-			<img  id="body--setting--img" src="/images/setting.png" alt="설정">
+			<a class="popup--cateogry--open" id="header--setting" href="#category--pop--up"> 
+				<img  id="body--setting--img" src="/images/setting.png" alt="설정">
+			</a>
+			<!-- 설정 -->
+			<form action="/category" method="post" enctype="multipart/form-data">
+					<div id="category--pop--up" class="popup--category--wrap" style="display: none;">
+						<div class="popup--category--inner" >
+							<div class="popup--item">
+								<button type="button" id="category--add">+ 추가</button>
+							</div>
+							<div id="category--main">
+								<div id="category-index" > 
+								 	<input type="text" id="category--input" onkeyup="characterCheck(this);" 
+								 			   name="categoryName">
+									<button type="button" class="category--minus"
+												 onclick="deleteIndex(this);" > ─ </button>
+									<br> <br> 
+								</div>
+							</div>
+							<div id="category--text">
+								<div>-카테고리는 최대 20개 까지만 설정 가능</div>
+								<div>-글자 수는 20자 이내 (공백 포함)</div>
+							</div>
+
+								<button class="popup-category-cancel" id="popup-category-cancel" type="button">취소</button>
+								<button class="popup-category-btn" id="popup-category-save" type="submit">완료</button>
+							
+						</div>
+					</div>
+				</form>
+			
+			
 		</div>
 		<br>
 		<div>Python (12)</div>
@@ -134,5 +166,7 @@
 
 
 
+
+<script type="text/javascript" src="/js/category.js"></script>
 </body>
 </html>

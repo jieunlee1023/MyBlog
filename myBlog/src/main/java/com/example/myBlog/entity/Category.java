@@ -9,9 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,34 +25,19 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board {
-
+public class Category {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false)
-	private String title;
+	@Column(nullable = false, length = 20)
+	private String categoryName;
 	
-	@Lob
-	private String content;
-	
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER) 
+	private List<Board> board;
+
 	@CreationTimestamp 
 	private Timestamp createDate;
-	
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "categoryId") 
-	private Category category;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId") 
-	private User userId;
 
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) 
-	private List<Reply> reply;
-
-
-
-	
 }
