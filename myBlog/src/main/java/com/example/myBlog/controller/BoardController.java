@@ -44,6 +44,19 @@ public class BoardController {
 	public String boardSave(RequestBoardDto boardDto,@PathVariable int categoryId, Model model) {
 		boardService.save(boardDto, categoryId);
 		return "redirect:/category/" + categoryId;
+	}
+	
+	
+	@GetMapping("/detail/{boardId}")
+	public String boardSave(@PathVariable int boardId, Model model) {
+		BlogHeadLine headlineEntity = mainService.findByLastDto();
+		model.addAttribute("blogHeadlineDto", headlineEntity);
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+		Board boardEntity = boardService.findbyId(boardId);
 		
+		model.addAttribute("boardEntity",boardEntity);
+		
+		return "board/detail";
 	}
 }

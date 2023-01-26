@@ -19,19 +19,21 @@
 	<div id="main--board--item">
 	<input type="hidden" value="${boardListSize }" id="board--size">
 	<c:forEach var="board" items="${boardList }">
+			
 				<div class="main--board--items">
 					<img id="new--bedge" src="/images/new.png">
 					<c:choose>
 						<c:when test="${empty board.boardImg }">
-							<div id="board--title--img"><span>${board.title }</span></div>
+							<div id="board--title--img"><div>${board.title }</div></div>
 						</c:when>
 						<c:otherwise>
 							<img class="board--img" src="http://localhost:9999/image/${board.boardImg}">
 						</c:otherwise>
 					</c:choose>
-					<div id="board--title">${board.title }</div>
+					<a href="/board/detail/${board.id }"><div id="board--title">${board.title }</div></a>
 					<div id="board--createDate">${board.createDate }</div>
 				</div>
+			
 	</c:forEach>
 		</div>
 

@@ -74,11 +74,12 @@
 #board--title--img {
 	width: 160px;
 	height: 160px;
-	border: 1px solid rgb(0,0,0,0.3);
+	border: 1px solid rgb(0, 0, 0, 0.3);
 }
 
-#board--title--img span{
+#board--title--img div {
 	font-size: 20px;
+	padding: 20px;
 }
 
 #board--title {

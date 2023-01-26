@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.myBlog.dto.request.CategoryDto;
 import com.example.myBlog.entity.BlogHeadLine;
 import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
@@ -35,8 +36,9 @@ public class CategoryController {
 	private BoardRepository boardRepository;
 
 	@PostMapping("/save")
-	public String categorySave(Category category, Model model) {
-		categoryService.save(category);
+	public String categorySave(CategoryDto categoryDto, Model model) {
+		
+		categoryService.save(categoryDto);
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 		return "redirect:/";

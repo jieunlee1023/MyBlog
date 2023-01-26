@@ -59,10 +59,13 @@ public class BoardService {
 			
 		}
 
+	}
 
-
-
-
+	public Board findbyId(int boardId) {
+		Board boardEntity = boardRepository.findById(boardId).orElseThrow(()->{
+			return new IllegalArgumentException("찾으시는 게시글이 없습니다.");
+		});
+		return boardEntity;
 	}
 
 }

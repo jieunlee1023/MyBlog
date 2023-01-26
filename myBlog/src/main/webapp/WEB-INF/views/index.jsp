@@ -45,8 +45,9 @@
 		</div>
 		<br>
 		<c:forEach var="category" items="${categories }">
-			<input type="hidden" value="${category.id }" id="categoryId">
-			<a href="/category/${category.id }" id="category--name">${category.categoryName } ()</a><br>
+			<input type="hidden" value="${category.id }" id="categoryId" >
+			<a href="/category/${category.id }" id="category--name" 
+			 	 onclick="tebClick(${category.id });">${category.categoryName } ()</a><br>
 		</c:forEach>
 
 	</div>
