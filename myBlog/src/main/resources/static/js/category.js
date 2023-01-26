@@ -28,15 +28,54 @@ for (var i = 0; i < target.length; i++) {
 
 	});
 }
-function deleteIndex(element) {
+function deleteIndex(element, categoryId, categoryBoardSize) {
+	var text = "해당 카테고리에 게시글이 존재합니다. 정말로 지우시겠습니까 ? \n삭제된 게시글을 되돌릴 수 없습니다."
 	if (count == 1) {
 		alert("카테고리는 최소 1개 이상이어야합니다.");
 	} else {
-		$(element).prev().remove();
-		$(element).next().remove();
-		$(element).next().remove();
-		$(element).remove();
-		count--;
+		if (categoryId == null || categoryId == "" ) {
+			$(element).prev().remove();
+			$(element).next().remove();
+			$(element).next().remove();
+			$(element).remove();
+			count--;
+		} else {
+			if (categoryBoardSize > 0) {
+				if (confirm(text) == true) {
+					$.ajax({
+						type: "DELETE",
+						url: `/api/category/delete/${categoryId}`,
+						dataType: "json",
+					}).done(function(data) {
+						if (data.status == "OK") {
+							$(element).prev().remove();
+							$(element).next().remove();
+							$(element).next().remove();
+							$(element).remove();
+							count--;
+						}
+					}).fail((error) => {
+					});
+				}
+			} else {
+
+				$.ajax({
+					type: "DELETE",
+					url: `/api/category/delete/${categoryId}`,
+					dataType: "json",
+				}).done(function(data) {
+					if (data.status == "OK") {
+						$(element).prev().remove();
+						$(element).next().remove();
+						$(element).next().remove();
+						$(element).remove();
+						count--;
+					}
+				}).fail((error) => {
+				});
+
+			}
+		}
 	}
 }
 
@@ -52,6 +91,4 @@ for (var j = 0; j < target.length; j++) {
 		this.parentNode.parentNode.style.display = 'none';
 	});
 }
-
-
 

@@ -21,10 +21,12 @@
 								<div id="category-index" > 
 								<input type="hidden" value="${categories.size() }" id="category--size">
 									<c:forEach var="category" items="${categories }">
+									<input type="hidden" value="${category.id }" id="category--id">
 								 	<input type="text" id="category--input" onkeyup="characterCheck(this);" 
-								 			   name="categoryName" value="${category.categoryName } ">
-									<button type="button" class="category--minus"
-												 onclick="deleteIndex(this);" > ─ </button>
+								 			   name="categoryName" value="${category.categoryName}">
+								 		
+									<button type="button" class="category--minus" id ="category--minus"
+												 onclick="deleteIndex(this, ${category.id}, ${category.board.size() });" > ─ </button>
 									<br> <br> 
 									</c:forEach>
 								</div>
@@ -45,9 +47,8 @@
 		</div>
 		<br>
 		<c:forEach var="category" items="${categories }">
-			<input type="hidden" value="${category.id }" id="categoryId" >
-			<a href="/category/${category.id }" id="category--name" 
-			 	 onclick="tebClick(${category.id });">${category.categoryName } ()</a><br>
+			<input type="hidden" value="${category.id}" id="categoryId" >
+			<a href="/category/${category.id}" id="category--name" >${category.categoryName} (${category.board.size() })</a><br>
 		</c:forEach>
 
 	</div>

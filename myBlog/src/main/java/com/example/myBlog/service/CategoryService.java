@@ -1,6 +1,7 @@
 package com.example.myBlog.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -20,28 +21,35 @@ public class CategoryService {
 	@Transactional
 	public void save(CategoryDto categoryDto) {
 
-		categoryDto.getCategoryName().forEach(t -> {
-			System.out.println(t);
+		List<Category> categories = categoryRepository.findAll();
 
-			List<Category> categories = categoryRepository.findAll();
-
-			if (categories.size() != 0) {
-				Category categoryEntity = categoryRepository.findbyCategoryName(t);
-				if (categoryEntity == null) {
-					Category category = new Category(categories.size()+1, t, null, null);
-					categoryRepository.save(category);
-				} else {
-					System.out.println("이미 있는 목록");
-					여기랑 - 할 때 삭제 해야함~!
-				}
-
-			} else {
-				Category category = new Category(1, t, null, null);
+		if (categories.size() == 0) {
+			// 제일 처음 비어있을 때
+			for (int i = 0; i < categoryDto.getCategoryName().size(); i++) {
+				Category category = new Category(i + 1, categoryDto.getCategoryName().get(i), null, null);
 				categoryRepository.save(category);
 			}
 
-		});
+		} else {
+			// 카테고리 안비어있음
+			System.out.println("XXX");
+			for (int i = 0; i < categoryDto.getCategoryName().size(); i++) {
+				Optional<Category> categoryEntity = categoryRepository.findById(i + 1);
+				if (categoryEntity.isEmpty() == true) {
+					Category category = new Category(i+1, categoryDto.getCategoryName().get(i), null, null);
+					categoryRepository.save(category);
+				} else {
+					categoryEntity.get().setCategoryName(categoryDto.getCategoryName().get(i));
+					categoryRepository.save(categoryEntity.get());
+				}
+			}
 
+		}
+
+	}
+
+	public void deleteByCategoryId(int categoryId) {
+		categoryRepository.deleteById(categoryId);
 	}
 
 }
