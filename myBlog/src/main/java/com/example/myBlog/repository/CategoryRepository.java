@@ -1,5 +1,7 @@
 package com.example.myBlog.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,6 +20,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
   						 + " WHERE id = ?1 "
 						 + " AND categoryName = ?2 " ,
 			nativeQuery = true)
-	Category findbyIdAndName(int i, String string);
+	Optional<Category> findbyIdAndName(int i, String string);
 
 }

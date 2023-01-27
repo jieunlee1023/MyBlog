@@ -48,21 +48,23 @@ public class CategoryController {
 	@GetMapping("/{categoryId}")
 	public String categorySave(@PathVariable int categoryId, Model model) {
 		List<Category> categories = categoryRepository.findAll();
-		model.addAttribute("categories", categories);
 
 		BlogHeadLine headlineEntity = mainService.findByLastDto();
-		model.addAttribute("blogHeadlineDto", headlineEntity);
 
 		Category categoryEntity = categoryRepository.findById(categoryId).orElseThrow(() -> {
 			return new IllegalArgumentException("찾으시는 카테고리가 없습니다.");
 		});
-		model.addAttribute("categoryEntity", categoryEntity);
 
 		List<Board> boardList = boardRepository.findbyCategoryId(categoryId);
+
+		
+		model.addAttribute("categories", categories);
+		model.addAttribute("categoryEntity", categoryEntity);
+		model.addAttribute("blogHeadlineDto", headlineEntity);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardListSize", boardList.size());
 
-		return "category/category-page";
+		return "index";
 	}
 	
 

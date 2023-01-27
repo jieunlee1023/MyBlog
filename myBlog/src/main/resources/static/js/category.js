@@ -18,7 +18,7 @@ for (var i = 0; i < target.length; i++) {
 				$('#category-index').append(
 					'<input type="text" id="category--input"onkeyup="characterCheck(this);" name="categoryName"> ' +
 					'<button type="button" class="category--minus" ' +
-					' onclick="deleteIndex(this);"> ─ </button><br><br>'
+					' onclick="deleteIndex(this);" style="background-color: black; "> ─ </button><br><br>'
 				);
 			} else {
 				alert("카테고리는 최대 20개 까지만 설정 가능합니다.");
@@ -89,6 +89,7 @@ function characterCheck(obj) {
 for (var j = 0; j < target.length; j++) {
 	btnPopClose[j].addEventListener('click', function() {
 		this.parentNode.parentNode.style.display = 'none';
+		location.href="/";
 	});
 }
 

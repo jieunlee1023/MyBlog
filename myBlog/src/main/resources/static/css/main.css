@@ -59,7 +59,7 @@
 #main--board--item {
 	display: grid;
 	grid-template-columns: 180px 180px 180px 180px;
-	grid-template-rows: 280px 280px;;
+	grid-template-rows: 350px 350px;;
 }
 
 .main--board--items {
@@ -79,22 +79,19 @@
 
 #board--title--img div {
 	font-size: 20px;
-	padding: 20px;
+	padding: 10px;
 }
 
 #board--title {
 	margin: 10px;
-	margin-bottom: 35px;
 }
 
 #board--createDate {
 	width: 80px;
-	margin: 10px;
 	font-size: 15px;
 	color: rgb(0, 0, 0, 0.5);
 	overflow: hidden;
 	white-space: nowrap;
-	margin-bottom: 15px;
 }
 
 .popup--category--wrap {
@@ -171,13 +168,14 @@
 
 .category--minus {
 	width: 10px;
-	height: 22px;
+	height: 18px;
 	border-radius: 50%;
-	background-color: black;
 	color: white;
 	font-size: 10px;
 	margin-left: 15px;
 	padding-right: 12px;
+	border: none;
+	font-weight: bold;
 }
 
 #popup-category-cancel {

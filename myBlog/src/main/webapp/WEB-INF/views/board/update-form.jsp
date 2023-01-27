@@ -27,36 +27,52 @@
 
 <div id="category--option">
 	<select id="category--select" name="category">
-		<option value="0" disabled selected>카테고리</option>
 		<c:forEach var="category" items="${categories }">
-			<option value="${category.id }">${category.categoryName }</option>
+			<c:choose>
+				<c:when test="${boardEntity.category.id eq category.id }">
+					<option value="${category.id }" selected>${category.categoryName }</option>
+				</c:when>
+				<c:otherwise>
+					<option value="${category.id }">${category.categoryName }</option>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 	</select>
 </div>
 
 <form action="/" method="post" enctype="multipart/form-data" id="write--form">
 	<input type="hidden" value="" id="categoryId" name="catagory">
+	<input type="hidden" value="${boardEntity.id }" id="boardId" name="boardId">
 	<div id="board--write">
 		<div>
-			<input id="board--write--title" type="text" placeholder="제목을 입력해주세요."
+			<input id="board--write--title" type="text" value="${boardEntity.title }"
 				required name="title">
 		</div>
 		<div>
 			<div style="display: flex;">
 				<label for="board--img--save" id="board--img--save--label">메인 이미지등록</label>
 				 <input type="file" id="board--img--save" name="file"> 
-				 <input class="board--upload-name" readonly> 
-				 <img src="/images/trashcan.png" id="trashcan--img" alt="휴지통"
-					style="display: none;">
+				 <input class="board--upload-name" readonly value="${boardEntity.boardImg }"> 
+				 <c:choose>
+				 	<c:when test="${empty boardEntity.boardImg}">
+					 <img src="/images/trashcan.png" id="board--trashcan--img" alt="휴지통"
+						style="display: none;">
+				 	</c:when>
+				 	<c:otherwise>
+					 <img src="/images/trashcan.png" id="board--trashcan--img" alt="휴지통"
+						style="display: block;" onclick="trashcan();">
+				 	</c:otherwise>
+				 </c:choose>
 			</div>
 		</div>
 		<br>
-		<textarea id="summernote" name="content"></textarea>
+		
+		<textarea id="summernote" name="content">${boardEntity.content }</textarea>
 	</div>
 	<div id="board--write--btn">
 		<button id="board--write--cancel" type="button"
 			onclick="history.back();">취소</button>
-		<button id="board--write--save" type="button" onclick="category()">등록</button>
+		<button id="board--write--update" type="button" onclick="category()">수정</button>
 	</div>
 </form>
 
@@ -65,7 +81,7 @@
 <br>
 <script>
 	$('#summernote').summernote({
-		placeholder : '내용을 입력해주세요!',
+		placeholder : "",
 		tabsize : 3,
 		height : 500,
 
@@ -75,33 +91,15 @@
 		if ($("#category--select").val() == null) {
 			alert("게시할 카테고리를 선택해주세요!");
 		} else {
-			$('#board--write--save').prop("type", "submit");
+			$('#board--write--update').prop("type", "submit");
 			$('#categoryId').prop("value", $("#category--select").val());
-			$('#write--form').prop("action", "/board/save-post/"+$("#category--select").val());
+			$('#write--form').prop("action", "/board/update/"+$("#boardId").val()+"/"+$("#category--select").val());
 		}
 	}
 	
-	$("#board--img--save").bind('change', function() {
-		var fileName = $("#board--img--save").val().split("\\").pop();;
-		var idxDot = fileName.lastIndexOf(".") + 1;
-		var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-		if (extFile != "jpg" && extFile != "jpeg" && extFile != "png") {
-			alert("이미지 확장자는 png / jpg / jpeg 만 등록 가능합니다!");
-		} else {
-			$(".board--upload-name").val(fileName);
-			$("#trashcan--img")[0].style.display = 'block';
-
-			$("#trashcan--img").bind("click", function() {
-				$("#board--img--save").val(null);
-				$(".board--upload-name").val("");
-				$("#trashcan--img")[0].style.display = 'none';
-			});
-
-		}
-	});
 	
 </script>
 
-
+<script type="text/javascript" src="/js/board.js"></script>
 </body>
 </html>

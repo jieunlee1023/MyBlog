@@ -30,22 +30,27 @@ public class CategoryService {
 				categoryRepository.save(category);
 			}
 
+		} else if (categories.size() >= categoryDto.getCategoryName().size()) {
+			System.out.println("여기로 들어옴");
 		} else {
 			// 카테고리 안비어있음
-			System.out.println("XXX");
-			for (int i = 0; i < categoryDto.getCategoryName().size(); i++) {
-				Optional<Category> categoryEntity = categoryRepository.findById(i + 1);
-				if (categoryEntity.isEmpty() == true) {
-					Category category = new Category(i+1, categoryDto.getCategoryName().get(i), null, null);
-					categoryRepository.save(category);
-				} else {
-					categoryEntity.get().setCategoryName(categoryDto.getCategoryName().get(i));
-					categoryRepository.save(categoryEntity.get());
+			for (int i = 0; i < categories.size(); i++) {
+				Optional<Category> categoryEntity = categoryRepository.findbyIdAndName(i + 1,
+						categoryDto.getCategoryName().get(i));
+				if (categoryDto.getCategoryName().get(i).isBlank() == false) {
+					if (categoryEntity.isEmpty() == true) {
+						Category category = new Category(i + 1, categoryDto.getCategoryName().get(i), null, null);
+						categoryRepository.save(category);
+					} else {
+						categoryEntity.get().setCategoryName(categoryDto.getCategoryName().get(i));
+						categoryRepository.save(categoryEntity.get());
+					}
+
 				}
+
 			}
 
 		}
-
 	}
 
 	public void deleteByCategoryId(int categoryId) {

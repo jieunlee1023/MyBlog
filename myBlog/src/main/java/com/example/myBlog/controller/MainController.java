@@ -32,12 +32,11 @@ public class MainController {
 	public String main(Model model) {
 		
 		List<Category> categories = categoryRepository.findAll();
-		model.addAttribute("categories", categories);
-		
 		BlogHeadLine headlineEntity  = mainService.findByLastDto();
-		model.addAttribute("blogHeadlineDto", headlineEntity);
-		
 		List<Board> boardList = boardRepository.findAll();
+
+		model.addAttribute("blogHeadlineDto", headlineEntity);
+		model.addAttribute("categories", categories);
 		model.addAttribute("boardList", boardList);
 		
 		return "index";

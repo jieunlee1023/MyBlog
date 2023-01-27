@@ -41,22 +41,49 @@ public class BoardController {
 	}
 
 	@PostMapping("/save-post/{categoryId}")
-	public String boardSave(RequestBoardDto boardDto,@PathVariable int categoryId, Model model) {
+	public String boardSave(RequestBoardDto boardDto, @PathVariable int categoryId, Model model) {
 		boardService.save(boardDto, categoryId);
 		return "redirect:/category/" + categoryId;
 	}
-	
-	
+
 	@GetMapping("/detail/{boardId}")
 	public String boardSave(@PathVariable int boardId, Model model) {
 		BlogHeadLine headlineEntity = mainService.findByLastDto();
-		model.addAttribute("blogHeadlineDto", headlineEntity);
 		List<Category> categories = categoryRepository.findAll();
-		model.addAttribute("categories", categories);
 		Board boardEntity = boardService.findbyId(boardId);
-		
-		model.addAttribute("boardEntity",boardEntity);
-		
+
+		model.addAttribute("blogHeadlineDto", headlineEntity);
+		model.addAttribute("boardEntity", boardEntity);
+		model.addAttribute("categories", categories);
+
 		return "board/detail";
+	}
+
+	@GetMapping("/update/{boardId}")
+	public String boardUpdateForm(@PathVariable int boardId, Model model) {
+
+		Board boardEntity = boardService.findbyId(boardId);
+		BlogHeadLine headlineEntity = mainService.findByLastDto();
+		List<Category> categories = categoryRepository.findAll();
+
+		model.addAttribute("blogHeadlineDto", headlineEntity);
+		model.addAttribute("categories", categories);
+		model.addAttribute("boardEntity", boardEntity);
+
+		return "board/update-form";
+	}
+
+	@PostMapping("/update/{boardId}/{categoryId}")
+	public String boardUpdate(RequestBoardDto boardDto, @PathVariable int boardId, @PathVariable int categoryId) {
+
+		boardService.updateBoardId(boardDto, boardId, categoryId);
+
+		return "redirect:/board/detail/" + boardId;
+	}
+
+	@GetMapping("/delete/{boardId}")
+	public String boardDelete(@PathVariable int boardId) {
+		boardService.deleteBoardId(boardId);
+		return "index";
 	}
 }

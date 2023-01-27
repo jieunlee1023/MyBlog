@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../index.jsp"%>
-
-
+<%@include file="../layout/header.jsp" %>
+<%@include file="../layout/nav.jsp" %>
 
 <div id="main--body--right">
 	<div>
@@ -35,10 +34,10 @@
 
 
 	<div id="board--datail--content">${boardEntity.content }</div>
-
+	<input type="hidden" value="${boardEntity.id }" id="board--id">
 	<div id="board--detail--btn">
-		<button id="board--detail--btn--update">수정</button>
-		<button id="board--detail--btn--delete">삭제</button>
+		<a id="board--detail--btn--update" href="/board/update/${boardEntity.id }">수정</a>
+		<a id="board--detail--btn--delete"  href="/board/delete/${boardEntity.id }">삭제</a>
 	</div>
 
 	<div id="board--datail--list">
@@ -103,7 +102,6 @@
 		});
 	})
 </script>
-
 
 </body>
 </html>

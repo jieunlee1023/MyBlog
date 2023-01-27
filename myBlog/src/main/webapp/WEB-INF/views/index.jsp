@@ -1,57 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="layout/header.jsp" %>
+<%@include file="layout/nav.jsp" %>
 
-<br>
-<div id="main--body">
+<div id="main--body--right">
+	<div id="body--right--top">
 
-	<div id="main--body--left">
-		<div id="main--left--title">
-			<a href="/" id="category--all">전체보기</a>
-			<a class="popup--cateogry--open" id="header--setting" href="#category--pop--up"> 
-				<img  id="body--setting--img" src="/images/setting.png" alt="설정">
-			</a>
-			<!-- 설정 -->
-			<form action="/category/save" method="post" >
-					<div id="category--pop--up" class="popup--category--wrap" style="display: none;">
-						<div class="popup--category--inner" >
-							<div class="popup--item">
-								<button type="button" id="category--add">+ 추가</button>
-							</div>
-							<div id="category--main">
-								<div id="category-index" > 
-								<input type="hidden" value="${categories.size() }" id="category--size">
-									<c:forEach var="category" items="${categories }">
-									<input type="hidden" value="${category.id }" id="category--id">
-								 	<input type="text" id="category--input" onkeyup="characterCheck(this);" 
-								 			   name="categoryName" value="${category.categoryName}">
-								 		
-									<button type="button" class="category--minus" id ="category--minus"
-												 onclick="deleteIndex(this, ${category.id}, ${category.board.size() });" > ─ </button>
-									<br> <br> 
-									</c:forEach>
-								</div>
-							</div>
-							<div id="category--text">
-								<div>-카테고리는 최대 20개 까지만 설정 가능</div>
-								<div>-글자 수는 20자 이내 (공백 포함)</div>
-							</div>
-
-								<button class="popup-category-cancel" id="popup-category-cancel" type="button">취소</button>
-								<button class="popup-category-btn" id="popup-category-save" type="submit">완료</button>
-							
-						</div>
+		<c:choose>
+			<c:when test="${empty categoryEntity }">
+					<div id="body--right--title">
+						<h3>전체보기</h3>
+						<h3 style="color: #5cbeb6">${boardList.size() } </h3>
 					</div>
-				</form>
-			
-			
-		</div>
-		<br>
-		<c:forEach var="category" items="${categories }">
-			<input type="hidden" value="${category.id}" id="categoryId" >
-			<a href="/category/${category.id}" id="category--name" >${category.categoryName} (${category.board.size() })</a><br>
-		</c:forEach>
+				
+			</c:when>
+			<c:otherwise>
+					<div id="body--right--title">
+						<h3>${categoryEntity.categoryName }</h3>
+						<h3 style="color: #5cbeb6">${boardListSize } </h3>
+					</div>
+			</c:otherwise>
+		</c:choose>
+
+
+		<a href="/board/save"><img id="main--right--img"
+			src="/images/write.png" alt="글쓰기"></a>
 
 	</div>
+<br>
+	<div id="main--board--item">
+	<input type="hidden" value="${boardListSize }" id="board--size">
+	<c:forEach var="board" items="${boardList }">
+			
+				<div class="main--board--items">
+					<img id="new--bedge" src="/images/new.png">
+					<c:choose>
+						<c:when test="${empty board.boardImg }">
+							<div id="board--title--img"><div>${board.title }</div></div>
+						</c:when>
+						<c:otherwise>
+							<img class="board--img" src="http://localhost:9999/image/${board.boardImg}">
+						</c:otherwise>
+					</c:choose>
+					<div id="board--title">
+						<a href="/board/detail/${board.id }" >${board.title }</a>
+						<br>
+						<div id="board--createDate">${board.createDate }</div>
+					</div>
+					
+				</div>
+			
+	</c:forEach>
+		</div>
 
+</div>
+<br><br><br>
+
+</body>
+</html>
 
 <script type="text/javascript" src="/js/category.js"></script>

@@ -68,4 +68,50 @@ public class BoardService {
 		return boardEntity;
 	}
 
+	public void updateBoardId(RequestBoardDto boardDto, int boardId, int categoryId) {
+
+		Board boardEntity = boardRepository.findById(boardId).orElseThrow(()->{
+			return new IllegalArgumentException("해당 게시글이 존재하지 않습니다.");
+		});
+		
+		Category categoryEntity = categoryRepository.findById(categoryId).orElseThrow(()->{
+			return new IllegalArgumentException("해당 카테고리가 존재하지 않습니다.");
+		});
+		
+		if (boardDto.getFile().getOriginalFilename() == "") {
+			Board board = boardDto.toEntitiy(null);
+			categoryEntity.getBoard().add(board);
+			boardEntity.setBoardImg(null);
+			
+		}else {
+			System.out.println("이미지 수정 저장");
+			UUID uuid = UUID.randomUUID();
+			String imageFileName = uuid + "_" + boardDto.getFile().getOriginalFilename();
+			System.out.println(imageFileName);
+			Path imageFilePath =  Paths.get("C:\\MyBlog\\image\\board\\" + imageFileName);
+			try {
+				Files.write(imageFilePath, boardDto.getFile().getBytes());
+				// DB 저장 로직 추가
+				Board board = boardDto.toEntitiy(imageFileName);
+				categoryEntity.getBoard().add(board);
+				boardEntity.setBoardImg(imageFileName);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		boardEntity.setCategory(categoryEntity);
+		boardEntity.setTitle(boardDto.getTitle());
+		boardEntity.setContent(boardDto.getContent());
+		
+		boardRepository.save(boardEntity);
+	}
+
+	public void deleteBoardId(int boardId) {
+		boardRepository.deleteById(boardId);
+	}
+
+
 }

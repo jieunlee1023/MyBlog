@@ -16,12 +16,13 @@
 
 #category--option option {
 	font-size: 15px;
+	border-radius: 0px;
 }
 
 #board--write {
 	width: 1000px;
 	margin: 0 auto;
-	margin-top: 50px;
+	margin-top: 20px;
 }
 
 #board--write--btn {
@@ -85,14 +86,13 @@
 }
 
 #new--bedge {
-	position:absolute;
+	position: absolute;
 	width: 15px;
 	height: 15px;
 	margin-left: 140px;
 	margin-top: 5px;
 	z-index: 1;
 }
-
 
 .board--upload-name {
 	height: 50px;
@@ -128,4 +128,43 @@
 	padding: 0;
 	overflow: hidden;
 	border: 0;
+}
+
+#board--title {
+	color: black;
+	margin-top: 10px;
+}
+
+#board--title a {
+	height: 70px;
+	text-decoration: none;
+	font-size: 13px;
+	color: black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+}
+
+#board--title a:hover {
+	font-weight: bold;
+}
+
+#board--title--img div {
+	height: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+}
+
+#board--trashcan--img {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	margin-left: 960px;
+	margin-top: 25px;
 }

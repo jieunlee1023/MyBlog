@@ -59,8 +59,8 @@
 								<div>
 								<div style="display: flex;">
 									<label for="img--save" id="img--save--label">이미지 등록</label> 
-									<input type="file" id="img--save"  name="file"> 
-									<input class="upload-name" readonly > 
+									<input type="file" id="img--save"  name="file" > 
+									<input class="upload-name" readonly> 
 									<img src="/images/trashcan.png" id="trashcan--img" alt="휴지통"
 											 style="display: none;">
 									</div>
@@ -119,5 +119,7 @@
 
 		</div>
 	</header>
+	
+	
 
 	<script type="text/javascript" src="/js/header.js"></script>

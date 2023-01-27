@@ -14,4 +14,5 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 				nativeQuery = true)
 	List<Board> findbyCategoryId(int categoryId);
 
+
 }
