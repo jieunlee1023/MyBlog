@@ -41,3 +41,8 @@ function replyCheck(obj) {
 		obj.value = obj.value.substring(0, obj.value.length - 1); // 입력한 특수문자 한자리 지움
 	}
 }
+var i = 0;
+	function replyPassword(){
+		$('.board--password')[i].style.display = 'inline';
+		i ++;
+	}

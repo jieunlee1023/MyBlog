@@ -59,10 +59,9 @@ public class BoardController {
 		});
 		
 		List<Board> prevNextBoards = boardService.findbyPrevNext(boardId);
-		
 		List<Reply> replyList =  replyRepository.findAll();
-		
 		List<Reply> replyListByBoardId = replyRepository.findbyBoardId(boardId);
+		List<Reply> replyOnedayCheck = replyRepository.oneDayCheck();
 
 		model.addAttribute("prevNextBoards", prevNextBoards);
 		model.addAttribute("blogHeadlineDto", headlineEntity);
@@ -71,6 +70,7 @@ public class BoardController {
 		model.addAttribute("categoryEntity", categoryEntity);
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("replyListByBoardId", replyListByBoardId);
+		model.addAttribute("replyOnedayCheck", replyOnedayCheck);
 
 		return "board/detail";
 	}

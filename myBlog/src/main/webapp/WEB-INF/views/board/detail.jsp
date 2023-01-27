@@ -88,17 +88,29 @@
 	
 	<c:forEach var="reply" items="${replyList }">
 	<c:if test="${reply.board.id eq boardEntity.id }">
-
 	<div id="board--datail--reply">
 		<div id="board--datail--reply--list">
 			<div id="board--datail--reply--list--header">
 				<div id="board--datail--reply--list--nickAndDate">
 					<div id="board--datail--reply--list--nickname">${reply.replyName }</div>
-					<div id="board--datail--reply--list--date">${reply.createDate }</div>
+					<div id="board--datail--reply--list--date">${reply.createDate }
+					
+					<c:forEach var="replyOnedayCheck" items="${replyOnedayCheck }">
+						<c:if test="${replyOnedayCheck.id eq reply.id }">
+							<img id="new--bedge--reply" src="/images/new.png">
+						</c:if>
+					</c:forEach>
+					
+					</div>
+					
+					
 				</div>
 				<div>
-					<input id="board--password" type="password" style="display: none;">
-					<button type="button" class="category--minus"  id="board--minus" style="background-color: black;">─</button>
+					<input class="board--password" type="password" style="display: none;"
+								value="${reply.password }">
+					<button type="button" class="category--minus"  id="board--minus" 
+					style="background-color: black;" onclick="replyPassword()">─</button>
+					<input type="hidden" value="${reply.id }" id="reply--password--check">
 				</div>
 			</div>
 			<div id="board--datail--reply--list--content">${reply.content }</div>
@@ -137,11 +149,8 @@
 			alert("URL 주소가 복사되었습니다.");
 			return false;
 		});
-	})
-	
-	$('#board--minus').bind("click", function(){
-		$("#board--password")[0].style.display = 'inline';
 	});
+
 	
 </script>
 

@@ -14,6 +14,12 @@ public interface ReplyRepository extends JpaRepository<Reply, Integer> {
 				nativeQuery = true)
 	List<Reply> findbyBoardId(int boardId);
 
+	
+	@Query(value = " SELECT * FROM reply "
+						+ " WHERE createDate > now() - INTERVAL 1 DAY " ,
+						nativeQuery = true)
+	List<Reply> oneDayCheck();
+
 
 
 }
