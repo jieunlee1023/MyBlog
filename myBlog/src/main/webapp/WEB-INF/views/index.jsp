@@ -37,7 +37,14 @@
 		<c:choose>
 			<c:when test="${empty categoryEntity }">
 				<div class="main--board--items">
+				
+				<c:forEach var="oneDayCheck" items="${oneDayCheck }">
+				<c:if test="${oneDayCheck.id eq board.id }">
 				<img id="new--bedge" src="/images/new.png">
+				</c:if>
+				</c:forEach>
+				
+				
 				<c:choose>
 					<c:when test="${empty board.boardImg }">
 						<div id="board--title--img">
@@ -58,7 +65,13 @@
 			</c:when>
 			<c:when test="${board.category.id eq categoryEntity.id }">
 				<div class="main--board--items">
+				
+				<c:forEach var="oneDayCheck" items="${oneDayCheck }">
+				<c:if test="${oneDayCheck.id eq board.id }">
 				<img id="new--bedge" src="/images/new.png">
+				</c:if>
+				</c:forEach>
+				
 				<c:choose>
 					<c:when test="${empty board.boardImg }">
 						<div id="board--title--img">

@@ -1,27 +1,22 @@
 package com.example.myBlog.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.myBlog.dto.request.RequestBoardDto;
 import com.example.myBlog.entity.BlogHeadLine;
 import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
+import com.example.myBlog.entity.Reply;
 import com.example.myBlog.repository.CategoryRepository;
+import com.example.myBlog.repository.ReplyRepository;
 import com.example.myBlog.service.BoardService;
 import com.example.myBlog.service.MainService;
 
@@ -35,6 +30,8 @@ public class BoardController {
 	private BoardService boardService;
 	@Autowired
 	private CategoryRepository categoryRepository;
+	@Autowired
+	private ReplyRepository replyRepository;
 
 	@GetMapping("/save")
 	public String boardSave(Model model) {
@@ -62,12 +59,18 @@ public class BoardController {
 		});
 		
 		List<Board> prevNextBoards = boardService.findbyPrevNext(boardId);
+		
+		List<Reply> replyList =  replyRepository.findAll();
+		
+		List<Reply> replyListByBoardId = replyRepository.findbyBoardId(boardId);
 
 		model.addAttribute("prevNextBoards", prevNextBoards);
 		model.addAttribute("blogHeadlineDto", headlineEntity);
 		model.addAttribute("boardEntity", boardEntity);
 		model.addAttribute("categories", categories);
 		model.addAttribute("categoryEntity", categoryEntity);
+		model.addAttribute("replyList", replyList);
+		model.addAttribute("replyListByBoardId", replyListByBoardId);
 
 		return "board/detail";
 	}

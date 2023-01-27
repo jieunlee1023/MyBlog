@@ -77,12 +77,13 @@
 	display: flex;
 	justify-content: space-between;
 }
-#board--datail--list--group-title a{
+
+#board--datail--list--group-title a {
 	text-decoration: none;
 	color: black;
 }
 
-#board--datail--list--group-title a:hover{
+#board--datail--list--group-title a:hover {
 	font-weight: bold;
 }
 
@@ -153,6 +154,9 @@
 
 #board--datail--reply--list--date {
 	color: rgb(0, 0, 0, 0.3);
+	width: 120px;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 #board--datail--reply--list--nickAndDate {
@@ -204,4 +208,8 @@
 	border-radius: 10px;
 	color: white;
 	margin: 18px;
+}
+
+#board--password {
+	width: 120px;
 }

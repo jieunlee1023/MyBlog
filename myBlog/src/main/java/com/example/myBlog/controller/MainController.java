@@ -17,8 +17,10 @@ import com.example.myBlog.dto.request.RequestBlogHeadlineDto;
 import com.example.myBlog.entity.BlogHeadLine;
 import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
+import com.example.myBlog.entity.Reply;
 import com.example.myBlog.repository.BoardRepository;
 import com.example.myBlog.repository.CategoryRepository;
+import com.example.myBlog.repository.ReplyRepository;
 import com.example.myBlog.service.BoardService;
 import com.example.myBlog.service.MainService;
 
@@ -36,7 +38,10 @@ public class MainController {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
-
+	
+	@Autowired
+	private ReplyRepository replyRepository;
+	
 	@GetMapping({ "", "/" })
 	public String main(Model model,
 			@PageableDefault(size = 16, sort = "id", direction = Direction.DESC) Pageable pageable) {
@@ -56,12 +61,14 @@ public class MainController {
 			pageNumbers.add(i);
 		}
 		
+		List<Board> oneDayCheck =  boardRepository.oneDayCheck();
 		
 		model.addAttribute("boards",boards);
 		model.addAttribute("nowPage",nowPage);
 		model.addAttribute("startPage",startPageNumber);
 		model.addAttribute("endPage",endPageNumber);
 		model.addAttribute("pageNumbers",pageNumbers);
+		model.addAttribute("oneDayCheck",oneDayCheck);
 
 		model.addAttribute("blogHeadlineDto", headlineEntity);
 		model.addAttribute("categories", categories);

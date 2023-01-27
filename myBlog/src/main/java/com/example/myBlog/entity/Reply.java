@@ -31,6 +31,10 @@ public class Reply {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(nullable = false)
+	private String replyName;
+	
+	
 	@Column(nullable = false, length = 200)
 	private String content;
 	

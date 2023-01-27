@@ -62,7 +62,7 @@
 			
 			<c:choose>
 				<c:when test="${categoryEntity.id eq category.id }">
-					<a href="/category/${category.id}" id="category--name"  style="font-weight: bold;">${category.categoryName} (${category.board.size() })</a><br>
+					<a href="/category/${category.id}" id="category--name"  style="font-weight: bold; color: black;">${category.categoryName} (${category.board.size() })</a><br>
 				</c:when>
 				<c:otherwise>
 					<a href="/category/${category.id}" id="category--name" >${category.categoryName} (${category.board.size() })</a><br>

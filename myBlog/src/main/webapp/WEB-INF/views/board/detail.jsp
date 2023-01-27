@@ -83,33 +83,41 @@
 		</div>
 	</div>
 	
+	<div id="board--detail--reply--text"> 댓글 <span>${replyListByBoardId.size() }</span></div>
+	<hr style="height: 3px; background: rgb(0, 0, 0, 0.1); border: none;">
+	
+	<c:forEach var="reply" items="${replyList }">
+	<c:if test="${reply.board.id eq boardEntity.id }">
 
 	<div id="board--datail--reply">
-		<div id="board--detail--reply--text">
-			댓글 <span>3</span>
-		</div>
-		<hr style="height: 3px; background: rgb(0, 0, 0, 0.1); border: none;">
 		<div id="board--datail--reply--list">
 			<div id="board--datail--reply--list--header">
 				<div id="board--datail--reply--list--nickAndDate">
-					<div id="board--datail--reply--list--nickname">닉네임</div>
-					<div id="board--datail--reply--list--date">2023.02.02
-						01:01:01</div>
+					<div id="board--datail--reply--list--nickname">${reply.replyName }</div>
+					<div id="board--datail--reply--list--date">${reply.createDate }</div>
 				</div>
-				<button type="button" class="category--minus" style="background-color: black;">─</button>
+				<div>
+					<input id="board--password" type="password" style="display: none;">
+					<button type="button" class="category--minus"  id="board--minus" style="background-color: black;">─</button>
+				</div>
 			</div>
-			<div id="board--datail--reply--list--content">잘 보고 갑니다</div>
+			<div id="board--datail--reply--list--content">${reply.content }</div>
 		</div>
 	</div>
 	<hr style="height: 3px; background: rgb(0, 0, 0, 0.1); border: none;">
-
+	</c:if>
+	</c:forEach>
+	
 <br><br>
 	<div id="board--detail--reply--save">
 		<div id="board--detail--reply--save--title">
-			<input placeholder="이름"> <input placeholder="비밀번호">
+			<input type="text" placeholder="이름" required id="reply--Name"
+							onkeyup="replyCheck(this);" onkeydown="replyCheck(this);"> 
+			<input type="password" placeholder="비밀번호" required id="reply--password"
+							onkeyup="replyCheck(this);" onkeydown="replyCheck(this);">
 		</div >
 		<div id="board--detail--reply--save--content">
-			<input placeholder="여러분의 소중한 댓글을 입력해주세요">
+			<input placeholder="여러분의 소중한 댓글을 입력해주세요" required id="reply--content">
 		</div>
 		<div id="board--detail--reply--save--content--btn" >
 			<button id="board--detail--reply--save--btn">등록</button>
@@ -130,7 +138,14 @@
 			return false;
 		});
 	})
+	
+	$('#board--minus').bind("click", function(){
+		$("#board--password")[0].style.display = 'inline';
+	});
+	
 </script>
+
+<script type="text/javascript" src="/js/reply.js"></script>
 
 </body>
 </html>

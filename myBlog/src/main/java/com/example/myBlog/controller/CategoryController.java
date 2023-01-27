@@ -77,7 +77,10 @@ public class CategoryController {
 			pageNumbers.add(i);
 		}
 		
+		List<Board> oneDayCheck =  boardRepository.oneDayCheck();
+
 		
+		model.addAttribute("oneDayCheck",oneDayCheck);
 		model.addAttribute("boards",boards);
 		model.addAttribute("nowPage",nowPage);
 		model.addAttribute("startPage",startPageNumber);
