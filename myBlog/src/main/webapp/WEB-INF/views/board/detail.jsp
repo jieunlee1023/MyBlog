@@ -47,13 +47,42 @@
 		</div>
 		<div id="board--datail--list--items">
 			<div id="board--datail--list--group">
-				<div id="board--datail--list--group-title">불황 속에서도 기업 성장꾀하는 전략
-					5</div>
-				<div id="board--datail--list--group-count">(3)</div>
+			<c:forEach var="prevNextBoard" items="${prevNextBoards }">
+				<c:if test="${prevNextBoard.id != boardEntity.id }">
+					<c:choose>
+						<c:when test="${ prevNextBoard.id > boardEntity.id}">
+							<div id="board--datail--list--group-title">
+								<a href="/board/detail/${prevNextBoard.id }" style="width: 500px;">
+									∧  ${prevNextBoard.title}
+									<span id="board--datail--list--group-count">(${prevNextBoard.reply.size() })</span>
+								</a>
+								<div id="board--datail--list--group-date-div">
+									<span id="board--datail--list--group-date">${prevNextBoard.createDate }</span>
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+						
+							<div id="board--datail--list--group-title">
+								<a href="/board/detail/${prevNextBoard.id }"  style="width: 500px;">
+									∨  ${prevNextBoard.title}
+									<span id="board--datail--list--group-count">(${prevNextBoard.reply.size() })</span>
+								</a>
+								<div id="board--datail--list--group-date-div">
+									<span id="board--datail--list--group-date">${prevNextBoard.createDate }</span>
+								</div>
+							</div>
+						
+						</c:otherwise>
+					</c:choose>
+
+					
+				</c:if>
+			</c:forEach>
 			</div>
-			<div id="board--datail--list--group-date">2022-10-23</div>
 		</div>
 	</div>
+	
 
 	<div id="board--datail--reply">
 		<div id="board--detail--reply--text">
@@ -67,7 +96,7 @@
 					<div id="board--datail--reply--list--date">2023.02.02
 						01:01:01</div>
 				</div>
-				<button type="button" class="category--minus" >─</button>
+				<button type="button" class="category--minus" style="background-color: black;">─</button>
 			</div>
 			<div id="board--datail--reply--list--content">잘 보고 갑니다</div>
 		</div>

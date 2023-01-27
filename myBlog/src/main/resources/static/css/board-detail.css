@@ -36,8 +36,8 @@
 
 #board--datail--content {
 	margin: 10px;
-	margin-top: 40px;
-	margin-bottom: 50px;
+	margin-top: 20px;
+	margin-bottom: 150px;
 }
 
 #board--datail--list {
@@ -69,17 +69,34 @@
 }
 
 #board--datail--list--group {
-	display: flex;
+	
 }
 
 #board--datail--list--group-title {
 	font-size: 15px;
+	display: flex;
+	justify-content: space-between;
+}
+#board--datail--list--group-title a{
+	text-decoration: none;
+	color: black;
+}
+
+#board--datail--list--group-title a:hover{
+	font-weight: bold;
 }
 
 #board--datail--list--group-count {
 	font-size: 15px;
 	margin-left: 5px;
 	color: #07beb8;
+}
+
+#board--datail--list--group-date-div {
+	width: 85px;
+	overflow: hidden;
+	white-space: nowrap;
+	margin-left: 120px;
 }
 
 #board--datail--list--group-date {
@@ -100,13 +117,12 @@
 	text-decoration: none;
 	color: rgb(0, 0, 0, 0.7);
 	width: 40px;
-	font-size: 15px;
+	font-size: 13px;
 	text-align: center;
 }
 
-#board--detail--btn--update:hover ,  #board--detail--btn--delete:hover{
-	background-color:  rgb(0, 0, 0, 0.1);
-	
+#board--detail--btn--update:hover, #board--detail--btn--delete:hover {
+	background-color: rgb(0, 0, 0, 0.1);
 }
 
 #board--detail--reply--text {

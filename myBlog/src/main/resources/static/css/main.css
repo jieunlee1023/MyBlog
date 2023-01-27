@@ -1,3 +1,5 @@
+input:focus {outline: none;} 
+
 #main--body {
 	width: 1000px;
 	margin: 0 auto;
@@ -214,4 +216,25 @@
 #category--name {
 	text-decoration: none;
 	color: rgb(0, 0, 0, 0.5);
+}
+
+.page-link {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+	text-align: center;
+}
+
+.page-item {
+	width: 30px;
+	text-decoration: none;
+	color: black;
+}
+
+#page--previous {
+	margin-right: 20px;
+}
+
+#page--next {
+	margin-left: 20px;
 }

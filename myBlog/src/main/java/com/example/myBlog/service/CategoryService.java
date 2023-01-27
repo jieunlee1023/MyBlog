@@ -22,19 +22,19 @@ public class CategoryService {
 	public void save(CategoryDto categoryDto) {
 
 		List<Category> categories = categoryRepository.findAll();
-
 		if (categories.size() == 0) {
 			// 제일 처음 비어있을 때
 			for (int i = 0; i < categoryDto.getCategoryName().size(); i++) {
-				Category category = new Category(i + 1, categoryDto.getCategoryName().get(i), null, null);
-				categoryRepository.save(category);
+				if (categoryDto.getCategoryName().get(i).isBlank() == false) {
+					Category category = new Category(i + 1, categoryDto.getCategoryName().get(i), null, null);
+					categoryRepository.save(category);
+				}
 			}
 
-		} else if (categories.size() >= categoryDto.getCategoryName().size()) {
-			System.out.println("여기로 들어옴");
 		} else {
 			// 카테고리 안비어있음
-			for (int i = 0; i < categories.size(); i++) {
+			System.out.println(categoryDto);
+			for (int i = 0; i < categoryDto.getCategoryName().size(); i++) {
 				Optional<Category> categoryEntity = categoryRepository.findbyIdAndName(i + 1,
 						categoryDto.getCategoryName().get(i));
 				if (categoryDto.getCategoryName().get(i).isBlank() == false) {
@@ -52,7 +52,7 @@ public class CategoryService {
 
 		}
 	}
-
+	@Transactional
 	public void deleteByCategoryId(int categoryId) {
 		categoryRepository.deleteById(categoryId);
 	}

@@ -14,5 +14,12 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 				nativeQuery = true)
 	List<Board> findbyCategoryId(int categoryId);
 
-
+	
+	@Query(value =  " SELECT * FROM board WHERE id = ?1 "
+						+ " UNION ALL ( "
+						+ " SELECT * FROM board WHERE id > ?1 AND id <= (?1 + 2) ORDER BY id DESC LIMIT 2 ) "
+						+ " UNION ALL ( "
+						+ " SELECT * FROM board WHERE id < ?1 ORDER BY id DESC LIMIT 2) ",
+			nativeQuery = true)
+	List<Board> findPrevNextBoards(int boardId);
 }

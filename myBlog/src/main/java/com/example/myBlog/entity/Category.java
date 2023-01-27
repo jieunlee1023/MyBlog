@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -25,18 +27,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
-	
+
 	@Id
-	@Column(nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(nullable = true)
 	private String categoryName;
-	
-	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) 
+
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Board> board;
 
-	@CreationTimestamp 
+	@CreationTimestamp
 	private Timestamp createDate;
 
 }

@@ -34,6 +34,9 @@ public class Reply {
 	@Column(nullable = false, length = 200)
 	private String content;
 	
+	@Column(nullable = false)
+	private String password;
+	
 	@ManyToOne
 	@JoinColumn(name = "boardId")
 	private Board board;

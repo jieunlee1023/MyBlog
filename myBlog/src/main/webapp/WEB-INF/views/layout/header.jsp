@@ -31,7 +31,7 @@
 						<div id="header--title">${blogHeadlineDto.blogName }</div>
 				</c:when>
 				<c:otherwise>
-					<header id="header--image" style="background-image: url('http://localhost:9999/image/${blogHeadlineDto.image}');">
+					<header id="header--image" style="background-image: url('http://localhost:9999/image/${blogHeadlineDto.image}'); ">
 						<div id="header--left">
 						<div id="header--title">${blogHeadlineDto.blogName}</div>
 				</c:otherwise>

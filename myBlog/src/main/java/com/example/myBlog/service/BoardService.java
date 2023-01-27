@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.myBlog.dto.request.RequestBoardDto;
@@ -60,7 +63,7 @@ public class BoardService {
 		}
 
 	}
-
+	@Transactional
 	public Board findbyId(int boardId) {
 		Board boardEntity = boardRepository.findById(boardId).orElseThrow(()->{
 			return new IllegalArgumentException("찾으시는 게시글이 없습니다.");
@@ -108,9 +111,18 @@ public class BoardService {
 		
 		boardRepository.save(boardEntity);
 	}
-
+	@Transactional
 	public void deleteBoardId(int boardId) {
 		boardRepository.deleteById(boardId);
+	}
+	@Transactional
+	public Page<Board> getBoardList(Pageable pageable) {
+		return boardRepository.findAll(pageable);
+	}
+	
+	@Transactional
+	public List<Board> findbyPrevNext(int boardId) {
+		return boardRepository.findPrevNextBoards(boardId);
 	}
 
 

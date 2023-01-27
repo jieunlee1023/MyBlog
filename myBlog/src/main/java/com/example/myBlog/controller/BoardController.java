@@ -1,8 +1,13 @@
 package com.example.myBlog.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,10 +56,18 @@ public class BoardController {
 		BlogHeadLine headlineEntity = mainService.findByLastDto();
 		List<Category> categories = categoryRepository.findAll();
 		Board boardEntity = boardService.findbyId(boardId);
+		
+		Category categoryEntity = categoryRepository.findById(boardEntity.getCategory().getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("찾으시는 카테고리가 없습니다.");
+		});
+		
+		List<Board> prevNextBoards = boardService.findbyPrevNext(boardId);
 
+		model.addAttribute("prevNextBoards", prevNextBoards);
 		model.addAttribute("blogHeadlineDto", headlineEntity);
 		model.addAttribute("boardEntity", boardEntity);
 		model.addAttribute("categories", categories);
+		model.addAttribute("categoryEntity", categoryEntity);
 
 		return "board/detail";
 	}
@@ -84,6 +97,6 @@ public class BoardController {
 	@GetMapping("/delete/{boardId}")
 	public String boardDelete(@PathVariable int boardId) {
 		boardService.deleteBoardId(boardId);
-		return "index";
+		return "redirect:/";
 	}
 }
