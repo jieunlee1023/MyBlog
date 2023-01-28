@@ -79,7 +79,7 @@ function deleteIndex(element, categoryId, categoryBoardSize) {
 	}
 }
 
-function characterCheck(obj) {
+function categoryCheck(obj) {
 	if (obj.value.length > 20) {
 		alert("카테고리명은 최대 20자 이내로 입력 가능합니다.");
 	}

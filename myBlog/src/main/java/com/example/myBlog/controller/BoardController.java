@@ -2,6 +2,7 @@ package com.example.myBlog.controller;
 
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,9 @@ import com.example.myBlog.entity.BlogHeadLine;
 import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
 import com.example.myBlog.entity.Reply;
-import com.example.myBlog.repository.CategoryRepository;
-import com.example.myBlog.repository.ReplyRepository;
+import com.example.myBlog.repository.IBoardRepository;
+import com.example.myBlog.repository.ICategoryRepository;
+import com.example.myBlog.repository.IReplyRepository;
 import com.example.myBlog.service.BoardService;
 import com.example.myBlog.service.MainService;
 
@@ -29,9 +31,11 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private IBoardRepository boardRepository;
 	@Autowired
-	private ReplyRepository replyRepository;
+	private ICategoryRepository categoryRepository;
+	@Autowired
+	private IReplyRepository replyRepository;
 
 	@GetMapping("/save")
 	public String boardSave(Model model) {
@@ -53,17 +57,38 @@ public class BoardController {
 		BlogHeadLine headlineEntity = mainService.findByLastDto();
 		List<Category> categories = categoryRepository.findAll();
 		Board boardEntity = boardService.findbyId(boardId);
-		
+
 		Category categoryEntity = categoryRepository.findById(boardEntity.getCategory().getId()).orElseThrow(() -> {
 			return new IllegalArgumentException("찾으시는 카테고리가 없습니다.");
 		});
-		
-		List<Board> prevNextBoards = boardService.findbyPrevNext(boardId);
-		List<Reply> replyList =  replyRepository.findAll();
+
+		List<Reply> replyList = replyRepository.findAll();
 		List<Reply> replyListByBoardId = replyRepository.findbyBoardId(boardId);
 		List<Reply> replyOnedayCheck = replyRepository.oneDayCheck();
 
-		model.addAttribute("prevNextBoards", prevNextBoards);
+		List<Board> prevNextBoards = boardService.findbyPrevNext(boardId, categoryEntity.getId());
+
+		List<Board> prevBoards = boardService.findbyPrev(boardId, categoryEntity.getId());
+		List<Board> nextBoards = boardService.findbyNext(boardId, categoryEntity.getId());
+
+		if (prevBoards.size() == 1) {
+			model.addAttribute("prevNextBoards", nextBoards);
+		} else if (prevBoards.size() == 2 && nextBoards.size()> 3 ) {
+			// 이전 글이 1개 이고 다음 글이 2개 이상 있을 때
+			Board boardNextEntity = nextBoards.get(2);
+			model.addAttribute("boardNextEntity", boardNextEntity);
+			model.addAttribute("prevNextBoards", prevNextBoards);
+		} else if (nextBoards.size() == 1) {
+			model.addAttribute("prevNextBoards", prevBoards);
+		} else if (nextBoards.size() == 2 && prevBoards.size() > 3) {
+			// 다음 글이 1개이고 이전 글이 3개 이상일 때
+				prevNextBoards.add(prevBoards.get(3));
+			model.addAttribute("prevNextBoards", prevNextBoards);
+		} else {
+			model.addAttribute("prevNextBoards", prevNextBoards);
+		}
+		
+
 		model.addAttribute("blogHeadlineDto", headlineEntity);
 		model.addAttribute("boardEntity", boardEntity);
 		model.addAttribute("categories", categories);

@@ -18,21 +18,21 @@ import com.example.myBlog.dto.request.RequestBoardDto;
 import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
 import com.example.myBlog.entity.Reply;
-import com.example.myBlog.repository.BoardRepository;
-import com.example.myBlog.repository.CategoryRepository;
-import com.example.myBlog.repository.ReplyRepository;
+import com.example.myBlog.repository.IBoardRepository;
+import com.example.myBlog.repository.ICategoryRepository;
+import com.example.myBlog.repository.IReplyRepository;
 
 @Service
 public class BoardService {
 
 	@Autowired
-	private BoardRepository boardRepository;
+	private IBoardRepository boardRepository;
 
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private ICategoryRepository categoryRepository;
 
 	@Autowired
-	private ReplyRepository replyRepository;
+	private IReplyRepository replyRepository;
 
 	@Transactional
 	public void save(RequestBoardDto boardDto, int categoryId) {
@@ -127,8 +127,8 @@ public class BoardService {
 	}
 
 	@Transactional
-	public List<Board> findbyPrevNext(int boardId) {
-		return boardRepository.findPrevNextBoards(boardId);
+	public List<Board> findbyPrevNext(int boardId, int categoryId) {
+		return boardRepository.findPrevNextBoards(boardId, categoryId);
 	}
 
 	@Transactional
@@ -141,6 +141,14 @@ public class BoardService {
 		reply.setBoard(boardEntity);
 		replyRepository.save(reply);
 
+	}
+
+	public List<Board> findbyPrev(int boardId, int categoryId) {
+		return  boardRepository.findPrevBoards(boardId, categoryId);
+	}
+
+	public List<Board> findbyNext(int boardId, int categoryId) {
+		return  boardRepository.findNextBoards(boardId, categoryId);
 	}
 
 }

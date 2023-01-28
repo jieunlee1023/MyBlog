@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.example.myBlog.entity.Reply;
 
-public interface ReplyRepository extends JpaRepository<Reply, Integer> {
+public interface IReplyRepository extends JpaRepository<Reply, Integer> {
 
 	@Query(value = " SELECT * FROM reply "
 						 + " WHERE boardId = ? ",

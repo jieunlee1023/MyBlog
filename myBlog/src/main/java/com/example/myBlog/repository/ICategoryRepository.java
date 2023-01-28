@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.example.myBlog.entity.Category;
 
-public interface CategoryRepository extends JpaRepository<Category, Integer> {
+public interface ICategoryRepository extends JpaRepository<Category, Integer> {
 
 	
 	@Query( value = " SELECT * FROM category "

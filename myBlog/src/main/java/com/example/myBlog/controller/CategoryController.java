@@ -19,8 +19,8 @@ import com.example.myBlog.dto.request.CategoryDto;
 import com.example.myBlog.entity.BlogHeadLine;
 import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
-import com.example.myBlog.repository.BoardRepository;
-import com.example.myBlog.repository.CategoryRepository;
+import com.example.myBlog.repository.IBoardRepository;
+import com.example.myBlog.repository.ICategoryRepository;
 import com.example.myBlog.service.BoardService;
 import com.example.myBlog.service.CategoryService;
 import com.example.myBlog.service.MainService;
@@ -36,13 +36,13 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private ICategoryRepository categoryRepository;
 
 	@Autowired
 	private BoardService boardService;
 	
 	@Autowired
-	private BoardRepository boardRepository;
+	private IBoardRepository boardRepository;
 
 	@PostMapping("/save")
 	public String categorySave(CategoryDto categoryDto, Model model) {

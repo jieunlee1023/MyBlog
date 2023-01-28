@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.myBlog.dto.request.CategoryDto;
 import com.example.myBlog.entity.Category;
-import com.example.myBlog.repository.CategoryRepository;
+import com.example.myBlog.repository.ICategoryRepository;
 
 @Service
 public class CategoryService {
 
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private ICategoryRepository categoryRepository;
 
 	@Transactional
 	public void save(CategoryDto categoryDto) {

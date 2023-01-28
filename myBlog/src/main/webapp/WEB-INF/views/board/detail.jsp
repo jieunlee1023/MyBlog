@@ -40,17 +40,36 @@
 		<a id="board--detail--btn--delete"  href="/board/delete/${boardEntity.id }">삭제</a>
 	</div>
 
+<c:if test="${ categoryEntity.board.size() > 1}"> 
 	<div id="board--datail--list">
 		<div id="board--datail--list--title">
-			<div id="board--datail--list--title--category">'${boardEntity.category.categoryName}'</div>
+					<div id="board--datail--list--title--category">'${boardEntity.category.categoryName}'</div>
 			<div id="board--datail--list--title--other">카테고리의 다른 글</div>
 		</div>
 		<div id="board--datail--list--items">
 			<div id="board--datail--list--group">
+			
+		<c:if test="${ boardNextEntity != null  }">
+			<div id="board--datail--list--group-title">
+				<a href="/board/detail/${boardNextEntity.id }" style="width: 500px;">
+						∧  ${boardNextEntity.title}
+				<span id="board--datail--list--group-count">(${boardNextEntity.reply.size() })</span>
+				</a>
+				<div id="board--datail--list--group-date-div">
+				<span id="board--datail--list--group-date">${boardNextEntity.createDate }</span>
+				</div>
+			</div>
+		</c:if>
+
 			<c:forEach var="prevNextBoard" items="${prevNextBoards }">
+			
+			
+			
 				<c:if test="${prevNextBoard.id != boardEntity.id }">
 					<c:choose>
+					
 						<c:when test="${ prevNextBoard.id > boardEntity.id}">
+						
 							<div id="board--datail--list--group-title">
 								<a href="/board/detail/${prevNextBoard.id }" style="width: 500px;">
 									∧  ${prevNextBoard.title}
@@ -61,6 +80,8 @@
 								</div>
 							</div>
 						</c:when>
+						
+						
 						<c:otherwise>
 						
 							<div id="board--datail--list--group-title">
@@ -82,7 +103,7 @@
 			</div>
 		</div>
 	</div>
-	
+	</c:if>
 	<div id="board--detail--reply--text"> 댓글 <span>${replyListByBoardId.size() }</span></div>
 	<hr style="height: 3px; background: rgb(0, 0, 0, 0.1); border: none;">
 	

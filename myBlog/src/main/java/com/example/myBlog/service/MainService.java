@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.myBlog.dto.request.RequestBlogHeadlineDto;
 import com.example.myBlog.entity.BlogHeadLine;
-import com.example.myBlog.repository.BlogHeadLineRepository;
+import com.example.myBlog.repository.IBlogHeadLineRepository;
 
 @Service
 public class MainService {
 
 	@Autowired
-	private BlogHeadLineRepository blogHeadLineRepository;
+	private IBlogHeadLineRepository blogHeadLineRepository;
 
 	@Transactional
 	public void blogHeadLineSave(RequestBlogHeadlineDto blogHeadlineDto) {

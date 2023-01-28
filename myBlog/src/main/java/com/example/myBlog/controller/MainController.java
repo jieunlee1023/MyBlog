@@ -18,9 +18,9 @@ import com.example.myBlog.entity.BlogHeadLine;
 import com.example.myBlog.entity.Board;
 import com.example.myBlog.entity.Category;
 import com.example.myBlog.entity.Reply;
-import com.example.myBlog.repository.BoardRepository;
-import com.example.myBlog.repository.CategoryRepository;
-import com.example.myBlog.repository.ReplyRepository;
+import com.example.myBlog.repository.IBoardRepository;
+import com.example.myBlog.repository.ICategoryRepository;
+import com.example.myBlog.repository.IReplyRepository;
 import com.example.myBlog.service.BoardService;
 import com.example.myBlog.service.MainService;
 
@@ -34,13 +34,13 @@ public class MainController {
 	private BoardService boardService;
 
 	@Autowired
-	private BoardRepository boardRepository;
+	private IBoardRepository boardRepository;
 
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private ICategoryRepository categoryRepository;
 	
 	@Autowired
-	private ReplyRepository replyRepository;
+	private IReplyRepository replyRepository;
 	
 	@GetMapping({ "", "/" })
 	public String main(Model model,
@@ -72,7 +72,6 @@ public class MainController {
 
 		model.addAttribute("blogHeadlineDto", headlineEntity);
 		model.addAttribute("categories", categories);
-		
 
 		return "index";
 	}
