@@ -55,7 +55,7 @@ public class CategoryController {
 
 	@GetMapping("/{categoryId}")
 	public String categorySave(@PathVariable int categoryId, Model model,
-			@PageableDefault(size = 16, sort = "id", direction = Direction.DESC) Pageable pageable) {
+			@PageableDefault(size = 16, sort = "createDate", direction = Direction.DESC) Pageable pageable) {
 		
 		List<Category> categories = categoryRepository.findAll();
 		BlogHeadLine headlineEntity = mainService.findByLastDto();
@@ -64,9 +64,10 @@ public class CategoryController {
 		});
 
 		Page<Board> boards = boardService.getBoardList(pageable);
+		Page<Board> categoryBoards = boardService.getBoardCategoryList(pageable, categoryEntity);
 		
 		
-		int PAGENATION_BLOCK_COUNT =4;
+		int PAGENATION_BLOCK_COUNT =10;
 		
 		int nowPage = boards.getPageable().getPageNumber() + 1;
 		int startPageNumber = Math.max(nowPage - PAGENATION_BLOCK_COUNT, 1);
@@ -76,6 +77,17 @@ public class CategoryController {
 		for (int i = startPageNumber; i <= endPageNumber; i++) {
 			pageNumbers.add(i);
 		}
+		
+		int categoryNowPage = boards.getPageable().getPageNumber() + 1;
+		int categoryStartPageNumber = Math.max(categoryNowPage - PAGENATION_BLOCK_COUNT, 1);
+		int categoryEndPageNumber = Math.min(categoryNowPage+PAGENATION_BLOCK_COUNT, categoryBoards.getTotalPages());
+		
+		
+		ArrayList<Integer> categoryPageNumbers = new ArrayList<>();
+		for (int i = categoryStartPageNumber; i <= categoryEndPageNumber; i++) {
+			categoryPageNumbers.add(i);
+		}
+		
 		
 		List<Board> oneDayCheck =  boardRepository.oneDayCheck();
 		List<Board> oneDayCategoryCheck =boardRepository.oneDayCategoryCheck();
@@ -88,6 +100,13 @@ public class CategoryController {
 		model.addAttribute("startPage",startPageNumber);
 		model.addAttribute("endPage",endPageNumber);
 		model.addAttribute("pageNumbers",pageNumbers);
+		model.addAttribute("categoryBoardsEmpty",categoryBoards.isEmpty());
+		
+		model.addAttribute("categoryBoards",categoryBoards);
+		model.addAttribute("categoryNowPage",categoryNowPage);
+		model.addAttribute("categoryStartPageNumber",categoryStartPageNumber);
+		model.addAttribute("categoryEndPageNumber",categoryEndPageNumber);
+		model.addAttribute("categoryPageNumbers",categoryPageNumbers);
 		
 		model.addAttribute("categories", categories);
 		model.addAttribute("categoryEntity", categoryEntity);

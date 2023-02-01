@@ -41,13 +41,13 @@ public class MainController {
 	
 	@GetMapping({ "", "/" })
 	public String main(Model model,
-			@PageableDefault(size = 16, sort = "id", direction = Direction.DESC) Pageable pageable) {
+			@PageableDefault(size = 16, sort = "createDate", direction = Direction.DESC) Pageable pageable) {
 
 		List<Category> categories = categoryRepository.findAll();
 		BlogHeadLine headlineEntity = mainService.findByLastDto();
 		Page<Board> boards = boardService.getBoardList(pageable);
 		
-		int PAGENATION_BLOCK_COUNT = 4;
+		int PAGENATION_BLOCK_COUNT = 2;
 		
 		int nowPage = boards.getPageable().getPageNumber() + 1;
 		int startPageNumber = Math.max(nowPage - PAGENATION_BLOCK_COUNT, 1);
@@ -58,11 +58,13 @@ public class MainController {
 			pageNumbers.add(i);
 		}
 		
+		
 		List<Board> oneDayCheck =  boardRepository.oneDayCheck();
 		List<Board> oneDayCategoryCheck =boardRepository.oneDayCategoryCheck();
 		
 		model.addAttribute("oneDayCheck",oneDayCheck);
 		model.addAttribute("oneDayCategoryCheck",oneDayCategoryCheck);
+		
 		
 		model.addAttribute("boards",boards);
 		model.addAttribute("nowPage",nowPage);

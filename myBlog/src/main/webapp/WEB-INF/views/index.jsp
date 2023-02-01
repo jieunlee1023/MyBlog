@@ -31,11 +31,12 @@
 	<div id="main--board--item">
 		<input type="hidden" value="${categoryEntity.board.size()}"	id="board--size">
 		
-		<c:forEach var="board" items="${boards.content}">
+		
 		
 			
 		<c:choose>
 			<c:when test="${empty categoryEntity }">
+			<c:forEach var="board" items="${boards.content}">
 				<div class="main--board--items">
 				
 				<c:forEach var="oneDayCheck" items="${oneDayCheck }">
@@ -62,8 +63,11 @@
 				</div>
 
 			</div>
+			</c:forEach>
 			</c:when>
-			<c:when test="${board.category.id eq categoryEntity.id }">
+			
+			<c:otherwise>
+			<c:forEach var="board" items="${categoryBoards.content}">
 				<div class="main--board--items">
 				
 				<c:forEach var="oneDayCheck" items="${oneDayCheck }">
@@ -89,20 +93,23 @@
 				</div>
 
 			</div>
-			</c:when>
+				</c:forEach>
+			</c:otherwise>
 		</c:choose>
 		
 		
 
 
 
-		</c:forEach>
+	
 	</div>
 
 	<!--페이징 처리-->
 	
-	<div class="page-link">
-	<c:set var="isDisabled" value="disabled"></c:set>
+	<c:choose>
+		<c:when  test="${board.category.id eq categoryEntity.id  }">
+			<div class="page-link">
+		<c:set var="isDisabled" value="disabled"></c:set>
 		<c:set var="isNotDisabled" value=""></c:set>
 
 		<div class="${boards.first ? isDisabled : isNotDisabled }">
@@ -112,7 +119,7 @@
 	
 		<c:forEach var="num" items="${pageNumbers}">
 			<c:choose>
-				<c:when test="${nowPage eq num}">
+				<c:when test="${nowPage eq num }">
 					<a class="page-item" href="?page=${num -1}" style="font-weight: bold; color: #07beb8">${num}</a>
 				</c:when>
 				<c:otherwise>
@@ -121,13 +128,47 @@
 			</c:choose>
 		</c:forEach>
 		
-		<div class="${boards.first ? isDisabled : isNotDisabled }" >
+		<div class="${boards.last ? isDisabled : isNotDisabled }" >
 			<a class="page-item"  id="page--next" href="?page=${boards.number+1}">  다음 ＞</a>
 		</div>
 		
+	</div>
 		
+		</c:when>
+		
+		
+		<c:otherwise>
+			
+	<c:if test="${categoryBoardsEmpty eq false}">
+			<div class="page-link">
+		<c:set var="isDisabled" value="disabled"></c:set>
+		<c:set var="isNotDisabled" value=""></c:set>
+
+		<div class="${categoryBoards.first ? isDisabled : isNotDisabled }">
+			<a class="page-item" id="page--previous" href="?page=${categoryBoards.number-1}"> ＜ 이전</a>
+		</div>
+
+		<c:forEach var="num" items="${categoryPageNumbers}">
+			<c:choose>
+				<c:when test="${categoryNowPage eq num }">
+					<a class="page-item" href="?page=${num -1}" style="font-weight: bold; color: #07beb8">${num}</a>
+				</c:when>
+				<c:otherwise>
+					<a class="page-item" href="?page=${num -1 }">${num}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<div class="${categoryBoards.last ? isDisabled : isNotDisabled }" >
+			<a class="page-item"  id="page--next" href="?page=${categoryBoards.number+1}">  다음 ＞</a>
+		</div>
 		
 	</div>
+	</c:if>	
+		
+		</c:otherwise>
+	</c:choose>
+	
 	<br> <br> <br>
 </div>
 

@@ -151,4 +151,8 @@ public class BoardService {
 		return  boardRepository.findNextBoards(boardId, categoryId);
 	}
 
+	public Page<Board> getBoardCategoryList(Pageable pageable, Category categoryEntity) {
+		return boardRepository.findbyCategoryIdAndPage(pageable,categoryEntity.getId());
+	}
+
 }

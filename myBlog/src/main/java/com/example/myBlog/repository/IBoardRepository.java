@@ -2,6 +2,8 @@ package com.example.myBlog.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -65,4 +67,10 @@ public interface IBoardRepository extends JpaRepository<Board, Integer> {
 						+ " GROUP BY categoryId ", 
 			nativeQuery = true)
 	List<Board> oneDayCategoryCheck();
+	
+	
+	@Query(value = " SELECT * FROM board "
+			+ " WHERE categoryId = ?1 ",
+	nativeQuery = true)
+	Page<Board> findbyCategoryIdAndPage(Pageable pageable, int id);
 }
