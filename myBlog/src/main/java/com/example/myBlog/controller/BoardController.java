@@ -49,6 +49,10 @@ public class BoardController {
 	@PostMapping("/save-post/{categoryId}")
 	public String boardSave(RequestBoardDto boardDto, @PathVariable int categoryId, Model model) {
 		boardService.save(boardDto, categoryId);
+		
+		Board oneDayCategoryCheck =  boardRepository.oneDayCategoryCheck(categoryId);
+		model.addAttribute("oneDayCategoryCheck",oneDayCategoryCheck);
+		
 		return "redirect:/category/" + categoryId;
 	}
 
@@ -88,7 +92,12 @@ public class BoardController {
 			model.addAttribute("prevNextBoards", prevNextBoards);
 		}
 		
-
+		List<Board> oneDayCheck =  boardRepository.oneDayCheck();
+		List<Board> oneDayCategoryCheck =boardRepository.oneDayCategoryCheck();
+		
+		model.addAttribute("oneDayCheck",oneDayCheck);
+		model.addAttribute("oneDayCategoryCheck",oneDayCategoryCheck);
+		
 		model.addAttribute("blogHeadlineDto", headlineEntity);
 		model.addAttribute("boardEntity", boardEntity);
 		model.addAttribute("categories", categories);

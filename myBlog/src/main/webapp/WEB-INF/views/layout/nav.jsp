@@ -7,6 +7,7 @@
 	<div id="main--body--left">
 		<div id="main--left--title">
 			<a href="/" id="category--all">전체보기</a>
+			
 			<a class="popup--cateogry--open" id="header--setting" href="#category--pop--up"> 
 				<img  id="body--setting--img" src="/images/setting.png" alt="설정">
 			</a>
@@ -64,12 +65,26 @@
 			<c:choose>
 				<c:when test="${categoryEntity.id eq category.id }">
 					<a href="/category/${category.id}" id="category--name"  style="font-weight: bold; color: black;">
-					${category.categoryName} (${category.board.size() })</a><br>
-
+					${category.categoryName} (${category.board.size() })
+				
+				
+				
+				<c:forEach var="oneDayCategoryCheck" items="${oneDayCategoryCheck }">
+					<c:if test="${ oneDayCategoryCheck != null && oneDayCategoryCheck.category.id eq category.id}">
+						<img id="new--bedge--category" src="/images/new.png">
+					</c:if>
+				</c:forEach>
+				</a><br>
 				</c:when>
 				<c:otherwise>
 					<a href="/category/${category.id}" id="category--name" >
 					${category.categoryName} (${category.board.size() })
+				
+				<c:forEach var="oneDayCategoryCheck" items="${oneDayCategoryCheck }">
+					<c:if test="${ oneDayCategoryCheck != null && oneDayCategoryCheck.category.id eq category.id}">
+						<img id="new--bedge--category" src="/images/new.png">
+					</c:if>
+				</c:forEach>
 					</a><br>
 					
 				</c:otherwise>

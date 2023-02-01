@@ -49,4 +49,20 @@ public interface IBoardRepository extends JpaRepository<Board, Integer> {
 						+ " SELECT * FROM board WHERE id > ?1 AND id <= ?1 + 4 AND categoryId = ?2 ORDER BY id DESC LIMIT 4) ",
 							nativeQuery = true)
 	List<Board> findNextBoards(int boardId, int categoryId);
+
+
+	
+	@Query(value = " SELECT * FROM board "
+						+ " WHERE createDate > now() - INTERVAL 1 DAY "
+						+ " AND categoryId = ?1 "
+						+ " LIMIT 1 ",
+	nativeQuery = true)	
+	Board oneDayCategoryCheck(int categoryId);
+
+
+	@Query(value = " SELECT * FROM board "
+						+ " WHERE createDate > now() - INTERVAL 1 DAY "
+						+ " GROUP BY categoryId ", 
+			nativeQuery = true)
+	List<Board> oneDayCategoryCheck();
 }

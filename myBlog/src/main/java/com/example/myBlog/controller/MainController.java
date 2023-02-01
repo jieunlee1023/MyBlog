@@ -39,9 +39,6 @@ public class MainController {
 	@Autowired
 	private ICategoryRepository categoryRepository;
 	
-	@Autowired
-	private IReplyRepository replyRepository;
-	
 	@GetMapping({ "", "/" })
 	public String main(Model model,
 			@PageableDefault(size = 16, sort = "id", direction = Direction.DESC) Pageable pageable) {
@@ -62,13 +59,16 @@ public class MainController {
 		}
 		
 		List<Board> oneDayCheck =  boardRepository.oneDayCheck();
+		List<Board> oneDayCategoryCheck =boardRepository.oneDayCategoryCheck();
+		
+		model.addAttribute("oneDayCheck",oneDayCheck);
+		model.addAttribute("oneDayCategoryCheck",oneDayCategoryCheck);
 		
 		model.addAttribute("boards",boards);
 		model.addAttribute("nowPage",nowPage);
 		model.addAttribute("startPage",startPageNumber);
 		model.addAttribute("endPage",endPageNumber);
 		model.addAttribute("pageNumbers",pageNumbers);
-		model.addAttribute("oneDayCheck",oneDayCheck);
 
 		model.addAttribute("blogHeadlineDto", headlineEntity);
 		model.addAttribute("categories", categories);
