@@ -13,8 +13,11 @@
 - 회사에 가서도 그 회사에 맞는 방향들을 미리 간접 체험해보기 좋았던 프로젝트였던 것 같습니다. 
 
 ## ⚙️ 사용 기술 및 라이브러리
- <img src="https://img.shields.io/badge/JAVA-B700FF?style=flat&logo=Eclipse IDE&logoColor=white"/>  
- <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=SpringBoot IDE&logoColor=white"/>  
+ <div align = "center">
+     <img src="https://img.shields.io/badge/JAVA-B700FF?style=flat&logo=Eclipse IDE&logoColor=white"/>  
+     <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=SpringBoot&logoColor=white"/>  
+     <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/>  
+ </div>
 
 ## 📽️ 구현 영상
 
