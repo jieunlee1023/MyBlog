@@ -14,7 +14,7 @@
 
 ## ⚙️ 사용 기술 및 라이브러리
  <img src="https://img.shields.io/badge/JAVA-B700FF?style=flat&logo=Eclipse IDE&logoColor=white"/>  
- <img src="https://img.shields.io/badge/JAVA-B700FF?style=flat&logo=Eclipse IDE&logoColor=white"/>  
+ <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=Spring Boot IDE&logoColor=white"/>  
 
 ## 📽️ 구현 영상
 
