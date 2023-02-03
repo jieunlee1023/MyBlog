@@ -16,7 +16,7 @@ for (var i = 0; i < target.length; i++) {
 			if (count < 20) {
 				count++;
 				$('#category-index').append(
-					'<input type="text" id="category--input"onkeyup="characterCheck(this);" name="categoryName"> ' +
+					'<input type="text" id="category--input"onkeyup="categoryCheck(this);" name="categoryName"> ' +
 					'<button type="button" class="category--minus" ' +
 					' onclick="deleteIndex(this);" style="background-color: black; "> ─ </button><br><br>'
 				);

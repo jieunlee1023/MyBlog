@@ -51,7 +51,7 @@
 			
 		<c:if test="${ boardNextEntity != null  }">
 			<div id="board--datail--list--group-title">
-				<a href="/board/detail/${boardNextEntity.id }" style="width: 500px;">
+				<a href="/board/detail/${boardNextEntity.id }" style="width: 700px;">
 						∧  ${boardNextEntity.title}
 				<span id="board--datail--list--group-count">(${boardNextEntity.reply.size() })</span>
 				</a>
@@ -71,7 +71,7 @@
 						<c:when test="${ prevNextBoard.id > boardEntity.id}">
 						
 							<div id="board--datail--list--group-title">
-								<a href="/board/detail/${prevNextBoard.id }" style="width: 500px;">
+								<a href="/board/detail/${prevNextBoard.id }" style="width: 700px;">
 									∧  ${prevNextBoard.title}
 									<span id="board--datail--list--group-count">(${prevNextBoard.reply.size() })</span>
 								</a>
@@ -85,7 +85,7 @@
 						<c:otherwise>
 						
 							<div id="board--datail--list--group-title">
-								<a href="/board/detail/${prevNextBoard.id }"  style="width: 500px;">
+								<a href="/board/detail/${prevNextBoard.id }"  style="width: 700px;">
 									∨  ${prevNextBoard.title}
 									<span id="board--datail--list--group-count">(${prevNextBoard.reply.size() })</span>
 								</a>
@@ -127,7 +127,7 @@
 					
 				</div>
 				<div>
-					<input class="board--password" type="password" style="display: none;"
+					<input class="board--password" id="board--password" type="password" style="display: none;"
 								value="${reply.password }">
 					<button type="button" class="category--minus"  id="board--minus" 
 					style="background-color: black;" onclick="replyPassword()">─</button>

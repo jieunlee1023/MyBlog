@@ -23,7 +23,7 @@
 								<input type="hidden" value="${categories.size() }" id="category--size">
 									<c:forEach var="category" items="${categories }">
 									<input type="hidden" value="${category.id }" id="category--id">
-								 	<input type="text" id="category--input" onkeyup="characterCheck(this);" 
+								 	<input type="text" id="category--input" onkeyup="categoryCheck(this);" 
 								 			   name="categoryName" value="${category.categoryName}">
 								 	
 								 	<c:choose>

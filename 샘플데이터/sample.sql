@@ -135,6 +135,16 @@ VALUES ('java10.jpg',
 'Object 클래스 , ArrayList',
 '2023-02-01 18:46:57.042000', '[230201] 자바 #19 (Object 클래스 , ArrayList)', 1);
 
+INSERT INTO board(boardImg,content, createDate, title, categoryId) 
+VALUES (null, 
+'자유 과제 (가위·바위·보 게임, 전화번호부, 비밀일기장)',
+now(), '[230203] 자바 #20 자유 과제 (가위·바위·보 게임, 전화번호부, 비밀일기장)', 1);
+
+INSERT INTO board(boardImg,content, createDate, title, categoryId) 
+VALUES ('java5.jpg', 
+' Swing(GUI 프로그램 ,배치 관리자 (레이아웃 Layout)',
+now(), '[230203] 자바 #21 Swing(GUI 프로그램 ,배치 관리자 (레이아웃 Layout))', 1);
+
 
 
 -- mysql
@@ -243,6 +253,16 @@ INSERT INTO board(boardImg,content, createDate, title, categoryId)
 VALUES ('spring.jpg', 
 'SpringBoot ① - 스프링 개념 정의 (JPA)',
 '2023-01-30 18:46:57.042000', '[230130] SpringBoot ① - 스프링 개념 정의 (JPA)', 3);
+
+INSERT INTO board(boardImg,content, createDate, title, categoryId) 
+VALUES ('spring.jpg', 
+'SpringBoot ① - Filter, Interceptor',
+'2023-01-31 18:46:57.042000', '[230131] SpringBoot ① - Filter, Interceptor', 3);
+
+INSERT INTO board(boardImg,content, createDate, title, categoryId) 
+VALUES ('spring.jpg', 
+' SpringBoot ② - 기본 설정1 : JPA (의존성 설정), MySQL 설정',
+'2023-02-01 18:46:57.042000', '[230201] SpringBoot ② - 기본 설정1 : JPA (의존성 설정), MySQL 설정' , 3);
 
 
 

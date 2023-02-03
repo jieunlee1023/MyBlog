@@ -5,7 +5,7 @@ let reply = {
 		});
 	},
 
-		replySave: function() {
+	replySave: function() {
 		let boardId = $("#board--id").val();
 		let sendData = {
 			replyName: $('#reply--Name').val(),
@@ -27,7 +27,7 @@ let reply = {
 		});
 
 	},
-	
+
 }
 
 reply.init();
@@ -42,7 +42,9 @@ function replyCheck(obj) {
 	}
 }
 var i = 0;
-	function replyPassword(){
-		$('.board--password')[i].style.display = 'inline';
-		i ++;
-	}
+function replyPassword() {
+
+	$('.board--password')[i].style.display = 'inline';
+	i++;
+
+}
