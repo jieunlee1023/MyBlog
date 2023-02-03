@@ -1,5 +1,5 @@
 
-
+<img width="768" alt="Screenshot_1" src="https://user-images.githubusercontent.com/113653130/216612631-4c2bbea6-ab25-4a69-abd1-4e604ad4163c.png">
 
 # My Blog
 [ ✏️ My Blog 웹 페이지 ]
@@ -14,9 +14,9 @@
 
 ## ⚙️ 사용 기술 및 라이브러리
  <img src="https://img.shields.io/badge/JAVA-B700FF?style=flat&logo=Eclipse IDE&logoColor=white"/>  
+ <img src="https://img.shields.io/badge/JAVA-B700FF?style=flat&logo=Eclipse IDE&logoColor=white"/>  
 
 ## 📽️ 구현 영상
-<div align=center>
 
 ### 📌 상단바 등록 & 수정
 ![1  header](https://user-images.githubusercontent.com/113653130/216611698-e31b239d-f18c-48bd-8a07-c10298f806bf.gif)
@@ -35,5 +35,3 @@
 
 ### 📌 댓글기능
 ![6  댓글](https://user-images.githubusercontent.com/113653130/216612245-86460edd-989b-454b-9b1b-b5c884b3affa.gif)
-
-</div>
